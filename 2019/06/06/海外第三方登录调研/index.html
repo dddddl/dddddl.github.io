@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="android,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Google 登录官方地址：https://developers.google.com/identity/sign-in/android/start-integrating 1.先决条件适用于Android的Google登录具有以下要求：  兼容的Android设备，运行Android 4.1或更高版本，包括Google Play商店或带有AVD的模拟器，可运行基于Android 4.2.2或更">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="海外第三方登录调研">
+<meta property="og:url" content="http://yoursite.com/2019/06/06/海外第三方登录调研/index.html">
+<meta property="og:site_name" content="一二三四五六 | 七">
+<meta property="og:description" content="Google 登录官方地址：https://developers.google.com/identity/sign-in/android/start-integrating 1.先决条件适用于Android的Google登录具有以下要求：  兼容的Android设备，运行Android 4.1或更高版本，包括Google Play商店或带有AVD的模拟器，可运行基于Android 4.2.2或更">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/google_config_01.png">
+<meta property="og:image" content="http://yoursite.com/images/google_config_02.png">
+<meta property="og:updated_time" content="2019-06-06T06:03:01.282Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="海外第三方登录调研">
+<meta name="twitter:description" content="Google 登录官方地址：https://developers.google.com/identity/sign-in/android/start-integrating 1.先决条件适用于Android的Google登录具有以下要求：  兼容的Android设备，运行Android 4.1或更高版本，包括Google Play商店或带有AVD的模拟器，可运行基于Android 4.2.2或更">
+<meta name="twitter:image" content="http://yoursite.com/images/google_config_01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/06/海外第三方登录调研/">
+
+
+
+
+
+  <title>海外第三方登录调研 | 一二三四五六 | 七</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一二三四五六 | 七</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">记录生活中的点点滴滴</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/06/海外第三方登录调研/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang liu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/author.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一二三四五六 | 七">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">海外第三方登录调研</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-06T14:03:01+08:00">
+                2019-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android海外调研/" itemprop="url" rel="index">
+                    <span itemprop="name">android海外调研</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h5 id="Google-登录"><a href="#Google-登录" class="headerlink" title="Google 登录"></a>Google 登录</h5><p>官方地址：<a href="https://developers.google.com/identity/sign-in/android/start-integrating" target="_blank" rel="noopener">https://developers.google.com/identity/sign-in/android/start-integrating</a></p>
+<h6 id="1-先决条件"><a href="#1-先决条件" class="headerlink" title="1.先决条件"></a>1.先决条件</h6><p>适用于Android的Google登录具有以下要求：</p>
+<ul>
+<li>兼容的Android设备，运行Android 4.1或更高版本，包括Google Play商店或带有AVD的模拟器，可运行基于Android 4.2.2或更高版本的Google API平台，并且具有15.0.0或更高版本的Google Play服务。</li>
+<li>最新版本的Android SDK，包括SDK Tools组件。SDK可从Android Studio中的<strong>Android SDK Manager</strong>获得。</li>
+<li>一个项目配置为针对Android 4.1（Jelly Bean）或更新版本进行编译。</li>
+<li>Google Play服务SDK：<ol>
+<li>在Android Studio中，选择<strong>工具&gt; Android&gt; SDK Manager</strong>。</li>
+<li>滚动到包列表的底部，然后选择<strong>其他&gt; Google Repository</strong>。该软件包将下载到您的计算机并安装在SDK环境中的 android-sdk-folder / extras / google / google_play_services中。</li>
+</ol>
+</li>
+</ul>
+<h6 id="2-添加Google-Play服务到工程中"><a href="#2-添加Google-Play服务到工程中" class="headerlink" title="2.添加Google Play服务到工程中"></a>2.添加Google Play服务到工程中</h6><p>在项目的顶级<code>build.gradle</code>文件中，确保包含Google的Maven存储库：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        google()</span><br><span class="line"></span><br><span class="line">        <span class="comment">// If you're using a version of Gradle lower than 4.1, you must instead use:</span></span><br><span class="line">        <span class="comment">// maven &#123;</span></span><br><span class="line">        <span class="comment">//     url 'https://maven.google.com'</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，在您的应用级<code>build.gradle</code>文件中，将Google Play服务声明为依赖项：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    dependencies &#123;</span><br><span class="line">        implementation <span class="string">'com.google.android.gms:play-services-auth:16.0.1'</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="3-配置Google-API控制项目"><a href="#3-配置Google-API控制项目" class="headerlink" title="3.配置Google API控制项目"></a>3.配置Google API控制项目</h6><p>点击配置项目，在弹出框中根据提示选择已有项目或者新建项目</p>
+<p><img src="\images\google_config_01.png" alt="google_config_01"></p>
+<p>填入项目的包名和SHA1值，确认无误后点击CREATE。<img src="/images/google_config_02.png" alt="google_config_02"></p>
+<p>完成后生成用于请求的client id。</p>
+<p>访问<a href="https://console.developers.google.com/" target="_blank" rel="noopener">https://console.developers.google.com</a>来管理你的项目的api</p>
+<h6 id="4-代码接入"><a href="#4-代码接入" class="headerlink" title="4.代码接入"></a>4.代码接入</h6><p>1.在xml中添加按钮，或者自定义一个按钮</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.google.android.gms.common.SignInButton</span><br><span class="line">        android:id=<span class="string">"@+id/signin"</span></span><br><span class="line">        android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintRight_toRightOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintTop_toTopOf=<span class="string">"parent"</span>/&gt;</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>.在onCreate中初始化</span><br><span class="line"></span><br><span class="line">gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)</span><br><span class="line">            .requestIdToken(<span class="string">"467286240798-p0u6t4qmflsouldr69jv852e5sa0hadh.apps.googleusercontent.com"</span>)</span><br><span class="line">            .requestEmail()</span><br><span class="line">            .requestId()</span><br><span class="line">            .requestProfile()</span><br><span class="line">            .build()</span><br><span class="line"></span><br><span class="line">googleSignInClient = GoogleSignIn.getClient(<span class="keyword">this</span>, gso!!)</span><br></pre></td></tr></table></figure>
+<p>其中requestIdToken 为之前申请的client id。（Web client）</p>
+<p>3.点击登录，在onActivityResult回调结果</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">signin.setOnClickListener &#123;</span><br><span class="line">    <span class="keyword">val</span> intent = googleSignInClient?.signInIntent</span><br><span class="line">    startActivityForResult(intent, <span class="number">111</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onActivityResult</span><span class="params">(requestCode: <span class="type">Int</span>, resultCode: <span class="type">Int</span>, <span class="keyword">data</span>: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, <span class="keyword">data</span>)</span><br><span class="line">    <span class="keyword">if</span> (requestCode == <span class="number">111</span>) &#123;</span><br><span class="line">        <span class="keyword">val</span> signedInAccount = GoogleSignIn.getSignedInAccountFromIntent(<span class="keyword">data</span>)</span><br><span class="line">        handleResult(signedInAccount)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">handleResult</span><span class="params">(googleData: <span class="type">Task</span>&lt;<span class="type">GoogleSignInAccount</span>&gt;?)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">val</span> signInAccount = googleData?.getResult(ApiException::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>)</span></span><br><span class="line">        <span class="keyword">val</span> account = GoogleSignIn.getLastSignedInAccount(<span class="keyword">this</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (signInAccount != <span class="literal">null</span>) &#123;</span><br><span class="line">            firebaseAuthWithGoogle(signInAccount)</span><br><span class="line">            <span class="keyword">var</span> str = signInAccount.getEmail() + <span class="string">"\n"</span> +</span><br><span class="line">                    signInAccount.getId() + <span class="string">"\n"</span> +</span><br><span class="line">                    signInAccount.getAccount()!!.name + <span class="string">"\n"</span> +</span><br><span class="line">                    signInAccount.getDisplayName() + <span class="string">"\n"</span> +</span><br><span class="line">                    signInAccount.getGivenName() + <span class="string">"\n"</span></span><br><span class="line">        &#125;</span><br><span class="line">        Toast.makeText(<span class="keyword">this</span>, <span class="string">"success"</span>, Toast.LENGTH_LONG).show()</span><br><span class="line">        <span class="comment">// Signed in successfully, show authenticated UI.</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (e: ApiException) &#123;</span><br><span class="line">        <span class="comment">// The ApiException status code indicates the detailed failure reason.</span></span><br><span class="line">        <span class="comment">// Please refer to the GoogleSignInStatusCodes class reference for more information.</span></span><br><span class="line">        Log.i(TAG, <span class="string">"signInResult:failed code="</span> + e.printStackTrace());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，google 登录功能以实现并获取到用户的信息。</p>
+<hr>
+<h5 id="Facebook-登录"><a href="#Facebook-登录" class="headerlink" title="Facebook 登录"></a>Facebook 登录</h5><p>官方地址：<a href="https://developers.facebook.com/docs/facebook-login/android?sdk=maven#" target="_blank" rel="noopener">https://developers.facebook.com/docs/facebook-login/android?sdk=maven#</a></p>
+<p>需要注册facebook开发者账号</p>
+<h6 id="1-选择应用或新建应用"><a href="#1-选择应用或新建应用" class="headerlink" title="1.选择应用或新建应用"></a>1.选择应用或新建应用</h6><p>选择已有应用或者创建应用。配置页会自动更新应用编号</p>
+<h6 id="2-集成-Facebook-SDK"><a href="#2-集成-Facebook-SDK" class="headerlink" title="2.集成 Facebook SDK"></a>2.集成 Facebook SDK</h6><p>在项目的顶级<code>build.gradle</code>文件中，确保包含jcenter的Maven存储库：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">		jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，在您的应用级<code>build.gradle</code>文件中，将Facebook login声明为依赖项：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    dependencies &#123;</span><br><span class="line">        implementation <span class="string">'com.facebook.android:facebook-login:4.42.0'</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="3-编辑资源和AndroidManifest-xml"><a href="#3-编辑资源和AndroidManifest-xml" class="headerlink" title="3.编辑资源和AndroidManifest.xml"></a>3.编辑资源和AndroidManifest.xml</h6><p>将生成的facebook_app_id与fb_login_protocol_scheme 添加到strings.xml</p>
+<p>在 <code>application</code> 元素后添加以下 <code>uses-permission</code> 元素：</p>
+<p>  <uses-permission android:name="android.permission.INTERNET"></uses-permission></p>
+<p>在 <code>application</code> 元素中添加以下 <code>meta-data</code> 元素、一个针对 Facebook 的 activity 元素以及一个针对 Chrome 自定义选项卡的 activity 元素和意向筛选条件：</p>
+<p><meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"> <activity android:name="com.facebook.FacebookActivity" android:configchanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name"> <activity android:name="com.facebook.CustomTabActivity" android:exported="true"> <intent-filter> <action android:name="android.intent.action.VIEW"> <category android:name="android.intent.category.DEFAULT"> <category android:name="android.intent.category.BROWSABLE"> <data android:scheme="@string/fb_login_protocol_scheme"> </data></category></category></action></intent-filter> </activity></activity></meta-data></p>
+<h6 id="4-在develop里添加包名-与-LAUNCHER-Activity"><a href="#4-在develop里添加包名-与-LAUNCHER-Activity" class="headerlink" title="4.在develop里添加包名 与 LAUNCHER Activity"></a>4.在develop里添加包名 与 LAUNCHER Activity</h6><h6 id="5-生成密钥散列并添加"><a href="#5-生成密钥散列并添加" class="headerlink" title="5.生成密钥散列并添加"></a>5.生成密钥散列并添加</h6><p><strong>Mac 操作系统</strong><br>要生成开发密钥散列，请打开一个终端窗口，运行以下命令：</p>
+<p>keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64</p>
+<p><strong>Windows</strong></p>
+<p>您需要以下各项：</p>
+<ul>
+<li>Java 开发包中的密钥和证书管理工具 (<code>keytool</code>)</li>
+<li>Windows 版 <code>openssl-for-windows</code> openssl 函数库</li>
+</ul>
+<p>下载openssl  <a href="https://code.google.com/archive/p/openssl-for-windows/downloads" target="_blank" rel="noopener">https://code.google.com/archive/p/openssl-for-windows/downloads</a>  在环境变量中配置openssl的bin路径到系统PATH。</p>
+<p>进入CMD输入: keytool -exportcert -alias （签名的alias名字） -keystore （keystore的名字） | openssl sha1 -binary | openssl base64</p>
+<p> 然后是提示输入密匙库口令：你的签名密码</p>
+<p>将生成的字符串填入输入框并保存</p>
+<h6 id="6-代码接入"><a href="#6-代码接入" class="headerlink" title="6.代码接入"></a>6.代码接入</h6><p>1.在xml中添加按钮，或者自定义一个按钮</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.facebook.login.widget.LoginButton</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/login_button"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_gravity</span>=<span class="string">"center_horizontal"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_marginTop</span>=<span class="string">"30dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_marginBottom</span>=<span class="string">"30dp"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>2.将 LoginManager 回调添加到 activity 或 fragment 的 <code>onCreate()</code> 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">callbackManager = CallbackManager.Factory.create();</span><br><span class="line"></span><br><span class="line">LoginManager.getInstance().registerCallback(callbackManager,</span><br><span class="line">        <span class="keyword">new</span> FacebookCallback&lt;LoginResult&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(LoginResult loginResult)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// App code</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCancel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                 <span class="comment">// App code</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(FacebookException exception)</span> </span>&#123;</span><br><span class="line">                 <span class="comment">// App code   </span></span><br><span class="line">            &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果登录成功，<code>LoginResult</code> 参数将拥有新的 <code>AccessToken</code> 及最新授予或拒绝的权限。</p>
+<p>最后，在 <code>onActivityResult</code> 方法中调用 <code>callbackManager.onActivityResult</code>，通过 <code>callbackManager</code> 将登录结果传递至 <code>LoginManager</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line">      callbackManager.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">      <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="7-检查登录状态"><a href="#7-检查登录状态" class="headerlink" title="7.检查登录状态"></a>7.检查登录状态</h6><p>您的应用一次只能登录一个用户，<code>LoginManager</code> 会为该用户设置当前的 <code>AccessToken</code> 和 <code>Profile</code>。FacebookSDK 会将该数据保存在共享首选项中，并在会话开始时设置此数据。您可以通过检查 <code>AccessToken.getCurrentAccessToken()</code> 和 <code>Profile.getCurrentProfile()</code> 来查看用户是否已登录。</p>
+<p>您可以通过 SDK 从缓存或应用书签中（如果应用冷启动）加载 <code>AccessToken.getCurrentAccessToken</code>。您应在 <code>Activity</code> 的 <code>onCreate</code> 方法中检查它的有效性：</p>
+<p>AccessToken accessToken = AccessToken.getCurrentAccessToken();<br>boolean isLoggedIn = accessToken != null &amp;&amp; !accessToken.isExpired();</p>
+<p>如果无效，则可以在自定义按钮的 <code>OnClickListener</code> 中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LoginManager.getInstance().logInWithReadPermissions(<span class="keyword">this</span>, Arrays.asList(<span class="string">"public_profile"</span>));</span><br></pre></td></tr></table></figure>
+<p>至此，facebook登录功能以实现并获取到用户的信息。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"><i class="fa fa-tag"></i> android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/06/海外第三方支付的接入方式/" rel="next" title="海外第三方支付的接入方式">
+                <i class="fa fa-chevron-left"></i> 海外第三方支付的接入方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/06/项目国际化处理方法/" rel="prev" title="项目国际化处理方法">
+                项目国际化处理方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/author.jpg" alt="Liang liu">
+            
+              <p class="site-author-name" itemprop="name">Liang liu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dddddl" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liouliang93@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Google-登录"><span class="nav-text">Google 登录</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-先决条件"><span class="nav-text">1.先决条件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-添加Google-Play服务到工程中"><span class="nav-text">2.添加Google Play服务到工程中</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-配置Google-API控制项目"><span class="nav-text">3.配置Google API控制项目</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-代码接入"><span class="nav-text">4.代码接入</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Facebook-登录"><span class="nav-text">Facebook 登录</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-选择应用或新建应用"><span class="nav-text">1.选择应用或新建应用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-集成-Facebook-SDK"><span class="nav-text">2.集成 Facebook SDK</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-编辑资源和AndroidManifest-xml"><span class="nav-text">3.编辑资源和AndroidManifest.xml</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-在develop里添加包名-与-LAUNCHER-Activity"><span class="nav-text">4.在develop里添加包名 与 LAUNCHER Activity</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-生成密钥散列并添加"><span class="nav-text">5.生成密钥散列并添加</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#6-代码接入"><span class="nav-text">6.代码接入</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#7-检查登录状态"><span class="nav-text">7.检查登录状态</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liang liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
