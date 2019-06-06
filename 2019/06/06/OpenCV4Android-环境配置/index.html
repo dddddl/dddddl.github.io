@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/images/opencv_config_02.png">
 <meta property="og:image" content="http://yoursite.com/images/opencv_config_03.png">
 <meta property="og:image" content="http://yoursite.com/images/opencv_config_04.png">
-<meta property="og:updated_time" content="2019-06-06T08:02:49.673Z">
+<meta property="og:updated_time" content="2019-06-06T08:08:04.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV4Android 环境配置">
 <meta name="twitter:description" content="简介最近公司有去水印等图片修复的需求，需要调研OpenCV，这个任务就留给我了。调研的过程顺便记录在blog里。 开发环境 电脑：Windows10 Android Studio：Version 3.4.1 SDK：Android Studio 3.4.1自带SDK JDK：Android Studio 自带JDK NDK：android-ndk-r14b OpenCV: V3.4.3  项目配置">
@@ -399,14 +399,13 @@
 </li>
 </ul>
 <ol start="4">
-<li>修改build.gradle内容<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">externalNativeBuild &#123;</span><br><span class="line">    cmake &#123;</span><br><span class="line">        arguments <span class="string">"-DANDROID_ARM_NEON=TRUE"</span>, <span class="string">"-DANDROID_TOOLCHAIN=clang"</span>, <span class="string">"-DCMAKE_BUILD_TYPE=Release"</span></span><br><span class="line">        cppFlags <span class="string">"-std=c++11"</span>, <span class="string">"-frtti"</span>, <span class="string">"-fexceptions"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ndk &#123;</span><br><span class="line">    abiFilters <span class="string">'armeabi-v7a'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>修改build.gradle内容</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">externalNativeBuild &#123;</span><br><span class="line">    cmake &#123;</span><br><span class="line">        arguments <span class="string">"-DANDROID_ARM_NEON=TRUE"</span>, <span class="string">"-DANDROID_TOOLCHAIN=clang"</span>, <span class="string">"-DCMAKE_BUILD_TYPE=Release"</span></span><br><span class="line">        cppFlags <span class="string">"-std=c++11"</span>, <span class="string">"-frtti"</span>, <span class="string">"-fexceptions"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ndk &#123;</span><br><span class="line">    abiFilters <span class="string">'armeabi-v7a'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">externalNativeBuild &#123;</span><br><span class="line">    cmake &#123;</span><br><span class="line">        path <span class="string">"CMakeLists.txt"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<pre><code><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">externalNativeBuild</span> &#123;</span><br><span class="line">    <span class="section">cmake</span> &#123;</span><br><span class="line">        <span class="attribute">path</span> <span class="string">"CMakeLists.txt"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre><ol start="4">
-<li><p>最终目录结构为下图</p>
-<p>​      <img src="\images\opencv_config_04.png" alt="opencv_config_04"></p>
-</li>
+<ol start="5">
+<li>最终目录结构为下图<br><img src="\images\opencv_config_04.png" alt="opencv_config_04"></li>
 </ol>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>OpenCV On Android 系列配置教程就到此为止，自己配置的时候走了很多弯路，希望这篇文章可以帮助到有需要的人们~</p>
 
