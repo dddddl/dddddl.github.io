@@ -84,7 +84,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="记录一个BUG">
 <meta property="og:url" content="http://yoursite.com/2019/11/18/记录一个奇怪的BUG/index.html">
-<meta property="og:site_name" content="一二三四五六 | 七">
+<meta property="og:site_name" content="今晚吃烧烤">
 <meta property="og:description" content="起因领导在群里喊BUG率直线上升。于是就在神策上看奔溃LOG，发现了vivo 8.1 系统上各种花式空指针奔溃，申请权限、跳转页面等。 日志LOG1java.lang.NullPointerException: Attempt to invoke virtual method &apos;boolean java.lang.Boolean.booleanValue()&apos; on a null object">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-11-18T05:50:13.708Z">
@@ -126,7 +126,7 @@
 
 
 
-  <title>记录一个BUG | 一二三四五六 | 七</title>
+  <title>记录一个BUG | 今晚吃烧烤</title>
   
 
 
@@ -156,12 +156,12 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">一二三四五六 | 七</span>
+        <span class="site-title">今晚吃烧烤</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description">记录生活中的点点滴滴</h1>
+        <h1 class="site-subtitle" itemprop="description">随便写写</h1>
       
   </div>
 
@@ -262,7 +262,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一二三四五六 | 七">
+      <meta itemprop="name" content="今晚吃烧烤">
     </span>
 
     
@@ -358,7 +358,7 @@
 <p>在注释掉这段代码后，经测试发现，还是会引起上述异常</p>
 </li>
 <li><p>最终解决</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyApplication : <span class="type">KApp</span>()</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">MyApplication :</span> KApp()</span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//MyApplication</span></span><br><span class="line"><span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">var</span> applicationInstance: MyApplication? = <span class="literal">null</span></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">getInstance</span><span class="params">()</span></span>: MyApplication &#123;</span><br><span class="line">            <span class="keyword">return</span> applicationInstance!!</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//KApp</span></span><br><span class="line"><span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">lateinit</span> <span class="keyword">var</span> app:KApp</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>在子类父类中都单例化了application，最终删除MyApplication中的相关代码后，测试发现不奔溃了。</p>
 <h6 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h6><p>愚蠢的一次BUG，撸代码要仔细啊！！</p>
