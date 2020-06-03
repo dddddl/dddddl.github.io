@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/记录一个奇怪的BUG/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/Flutter Plugins/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang liu">
@@ -271,7 +271,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/18/记录一个奇怪的BUG/" itemprop="url">记录一个BUG</a></h2>
+                <a class="post-title-link" href="/2020/06/03/Flutter Plugins/" itemprop="url">Flutter Plugins 学习</a></h2>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-18T13:50:41+08:00">
-                2019-11-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-03T10:16:40+08:00">
+                2020-06-03
               </time>
             
 
@@ -306,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
                   </a>
                 </span>
 
@@ -346,12 +346,17 @@
         
           
           
-起因领导在群里喊BUG率直线上升。于是就在神策上看奔溃LOG，发现了vivo 8.1 系统上各种花式空指针奔溃，申请权限、跳转页面等。
-日志LOG1java.lang.NullPointerException: Attempt to invoke virtual method 'boolean j
+创建1flutter create --org com.example --template=plugin -i swift -a kotlin hello
+将会在hello/目录里创建插件工程
+
+1lib/hello.dart
+插件包的Dart API.
+
+1android/src/main/j
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/18/记录一个奇怪的BUG/#more" rel="contents">
+            <a class="btn" href="/2020/06/03/Flutter Plugins/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -405,7 +410,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/Google Play 支付调研/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/Flutter 屏幕适配/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang liu">
@@ -424,7 +429,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/10/29/Google Play 支付调研/" itemprop="url">Google Play 支付调研</a></h2>
+                <a class="post-title-link" href="/2020/06/03/Flutter 屏幕适配/" itemprop="url">Flutter 屏幕适配</a></h2>
         
 
         <div class="post-meta">
@@ -436,8 +441,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-29T10:19:03+08:00">
-                2019-10-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-03T10:15:25+08:00">
+                2020-06-03
               </time>
             
 
@@ -459,8 +464,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android海外调研/" itemprop="url" rel="index">
-                    <span itemprop="name">android海外调研</span>
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
                   </a>
                 </span>
 
@@ -498,14 +503,14 @@
       
         
           
-          Google Play 支付调研目的：调研使用Google Play 配置商品并完成结算后，查询是否有商品订单号与唯一ID与我们的服务器做映射
-结论：可以达到要求
-使用 TrivialDrive v2 示例应用 google sample应用
-进入应用，会查询Google Play 后台配置的商品信
+          
+Flutter中空间的大小单位为dp，与android一致，可以考虑与之前方案思路相同的适配方案，都以px为基准来适配。
+假设ui 设计以 1080 x 1920(px)为基准，有一个540x960的组件，按比例来讲，实际显示的大小为设备的一半。
+假定设备宽高为deviceWidth和device
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/10/29/Google Play 支付调研/#more" rel="contents">
+            <a class="btn" href="/2020/06/03/Flutter 屏幕适配/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -559,7 +564,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/Android 获取地理位置国家/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/Fluro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang liu">
@@ -578,7 +583,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/10/29/Android 获取地理位置国家/" itemprop="url">Android 获取地理位置国家</a></h2>
+                <a class="post-title-link" href="/2020/06/03/Fluro/" itemprop="url">Fluro</a></h2>
         
 
         <div class="post-meta">
@@ -590,8 +595,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-29T10:19:03+08:00">
-                2019-10-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-03T10:14:59+08:00">
+                2020-06-03
               </time>
             
 
@@ -613,8 +618,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android海外调研/" itemprop="url" rel="index">
-                    <span itemprop="name">android海外调研</span>
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
                   </a>
                 </span>
 
@@ -652,11 +657,16 @@
       
         
           
-          Android 获取地理位置国家1. 通过TelephonyManager获取国家/地区代码12TelephonyManager tm = (TelephonyManager)this.getSystemService(this.TELEPHONY_SERVICE);String countryCo
+          
+Fluro路由地址，只能传递String类型（并且不支持中文），所以需要对 中文，int,double,bool,自定义类型进行一个转换
+缺点：
+本地页面每次都需要进行类型转换。
+需要注册和配置，相比于原生的路由框架多了一层
+123456789101112131415161718192021voi
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/10/29/Android 获取地理位置国家/#more" rel="contents">
+            <a class="btn" href="/2020/06/03/Fluro/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -710,7 +720,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/06/OpenCV4Android-环境配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/Flutter 路由/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang liu">
@@ -729,7 +739,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/06/OpenCV4Android-环境配置/" itemprop="url">OpenCV4Android 环境配置</a></h2>
+                <a class="post-title-link" href="/2020/06/03/Flutter 路由/" itemprop="url">Flutter 路由</a></h2>
         
 
         <div class="post-meta">
@@ -741,8 +751,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-06T14:28:21+08:00">
-                2019-06-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-03T10:14:38+08:00">
+                2020-06-03
               </time>
             
 
@@ -764,8 +774,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV4Android/" itemprop="url" rel="index">
-                    <span itemprop="name">OpenCV4Android</span>
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
                   </a>
                 </span>
 
@@ -804,16 +814,12 @@
         
           
           
-简介最近公司有去水印等图片修复的需求，需要调研OpenCV，这个任务就留给我了。调研的过程顺便记录在blog里。
-开发环境
-电脑：Windows10
-Android Studio：Version 3.4.1
-SDK：Android Studio 3.4.1自带SDK
-JDK：Android Stu
+路由(Route)，在移动开发中通常用来表示移动应用的页面（Page），具体来说，Route在Android中通常指一个Activity，在iOS中指一个ViewController。
+MaterialPageRoute继承自PageRoute类，PageRoute类是一个抽象类，表示占有整个屏幕
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/06/06/OpenCV4Android-环境配置/#more" rel="contents">
+            <a class="btn" href="/2020/06/03/Flutter 路由/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -867,7 +873,7 @@ JDK：Android Stu
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/06/项目国际化处理方法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/Flutter 动画/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang liu">
@@ -886,7 +892,7 @@ JDK：Android Stu
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/06/项目国际化处理方法/" itemprop="url">项目国际化处理方法</a></h2>
+                <a class="post-title-link" href="/2020/06/03/Flutter 动画/" itemprop="url">Flutter 动画</a></h2>
         
 
         <div class="post-meta">
@@ -898,8 +904,8 @@ JDK：Android Stu
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-06T14:03:01+08:00">
-                2019-06-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-03T10:11:57+08:00">
+                2020-06-03
               </time>
             
 
@@ -921,8 +927,8 @@ JDK：Android Stu
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android海外调研/" itemprop="url" rel="index">
-                    <span itemprop="name">android海外调研</span>
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
                   </a>
                 </span>
 
@@ -961,21 +967,16 @@ JDK：Android Stu
         
           
           
-开发者账号申请
-打开https://play.google.com/apps/publish登录Google账号
-支付25美金
-
-在Google Play Console 创建应用
-选择默认语言、APP名称、描述，然后创建
-上传屏幕截图、高分辨率图标、置顶大图
-
-
-
-然接着选择应用类型和类别，填写
+简介Animation在动画的每一帧中，我们可以通过Animation对象的value属性获取动画的当前状态值。
+Animation
+Animation
+Animation
+Animation
+AnimationControllerAnimationController用于控制动画，它包含动画的启
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/06/06/项目国际化处理方法/#more" rel="contents">
+            <a class="btn" href="/2020/06/03/Flutter 动画/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1020,7 +1021,7 @@ JDK：Android Stu
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1068,7 +1069,7 @@ JDK：Android Stu
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1079,7 +1080,7 @@ JDK：Android Stu
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1090,7 +1091,7 @@ JDK：Android Stu
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1143,7 +1144,7 @@ JDK：Android Stu
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

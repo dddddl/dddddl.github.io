@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Flutter,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介Animation在动画的每一帧中，我们可以通过Animation对象的value属性获取动画的当前状态值。 Animation Animation Animation Animation AnimationControllerAnimationController用于控制动画，它包含动画的启动forward()、停止stop() 、反向播放 reverse()等方法。 12final An">
+<meta name="keywords" content="Flutter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter 动画">
+<meta property="og:url" content="http://yoursite.com/2020/06/03/Flutter 动画/index.html">
+<meta property="og:site_name" content="今晚吃烧烤">
+<meta property="og:description" content="简介Animation在动画的每一帧中，我们可以通过Animation对象的value属性获取动画的当前状态值。 Animation Animation Animation Animation AnimationControllerAnimationController用于控制动画，它包含动画的启动forward()、停止stop() 、反向播放 reverse()等方法。 12final An">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-06-03T02:13:38.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter 动画">
+<meta name="twitter:description" content="简介Animation在动画的每一帧中，我们可以通过Animation对象的value属性获取动画的当前状态值。 Animation Animation Animation Animation AnimationControllerAnimationController用于控制动画，它包含动画的启动forward()、停止stop() 、反向播放 reverse()等方法。 12final An">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/06/03/Flutter 动画/">
+
+
+
+
+
+  <title>Flutter 动画 | 今晚吃烧烤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">今晚吃烧烤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">随便写写</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/Flutter 动画/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang liu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/author.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="今晚吃烧烤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Flutter 动画</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-03T10:11:57+08:00">
+                2020-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><h5 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h5><p>在动画的每一帧中，我们可以通过<code>Animation</code>对象的<code>value</code>属性获取动画的当前状态值。</p>
+<p>Animation<double></double></p>
+<p>Animation<color></color></p>
+<p>Animation<size></size></p>
+<p>Animation<edgeinsets></edgeinsets></p>
+<h5 id="AnimationController"><a href="#AnimationController" class="headerlink" title="AnimationController"></a>AnimationController</h5><p><code>AnimationController</code>用于控制动画，它包含动画的启动<code>forward()</code>、停止<code>stop()</code> 、反向播放 <code>reverse()</code>等方法。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> AnimationController controller = <span class="keyword">new</span> AnimationController(</span><br><span class="line">    duration: <span class="keyword">const</span> <span class="built_in">Duration</span>(milliseconds: <span class="number">2000</span>), vsync: <span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<h6 id="Ticker"><a href="#Ticker" class="headerlink" title="Ticker"></a>Ticker</h6><p>创建 AnimationController 需要传入vsync参数，它接收一个TickerProvider类型的对象，主要是创建Ticker。</p>
+<p>Flutter应用启动会绑定SchedluerBinding，可以给每次屏幕刷新添加回调，Ticker就是通过其来添加回调。Ticker回调驱动动画刷新，当屏幕锁屏SchedluerBinding停止刷新，Ticker就不会再触发，可以减少不必要的资源消耗。</p>
+<h5 id="Curve"><a href="#Curve" class="headerlink" title="Curve"></a>Curve</h5><p>Flutter中通过<code>Curve</code>（曲线）来描述动画过程</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> CurvedAnimation curve =</span><br><span class="line">    <span class="keyword">new</span> CurvedAnimation(<span class="string">parent:</span> controller, <span class="string">curve:</span> Curves.easeIn);</span><br></pre></td></tr></table></figure>
+<p>通过设置Curvers枚举，决定动画过程。</p>
+<h5 id="Tween"><a href="#Tween" class="headerlink" title="Tween"></a>Tween</h5><p><code>Tween</code>继承自<code>Animatable&lt;T&gt;</code>，而不是继承自<code>Animation&lt;T&gt;</code>，<code>Animatable</code>中主要定义动画值的映射规则</p>
+<p>要使用Tween对象，需要调用其<code>animate()</code>方法，然后传入一个控制器对象。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> AnimationController controller = <span class="keyword">new</span> AnimationController(</span><br><span class="line"><span class="symbol">    duration:</span> const Duration(<span class="string">milliseconds:</span> <span class="number">500</span>), <span class="string">vsync:</span> <span class="keyword">this</span>);</span><br><span class="line">Animation&lt;<span class="keyword">int</span>&gt; alpha = <span class="keyword">new</span> IntTween(<span class="string">begin:</span> <span class="number">0</span>, <span class="string">end:</span> <span class="number">255</span>).animate(controller);</span><br></pre></td></tr></table></figure>
+<h4 id="动画基本结构"><a href="#动画基本结构" class="headerlink" title="动画基本结构"></a>动画基本结构</h4><h5 id="基础版本"><a href="#基础版本" class="headerlink" title="基础版本"></a>基础版本</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScaleAnimationRoute</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _ScaleAnimationRouteState createState() =&gt; <span class="keyword">new</span> _ScaleAnimationRouteState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//需要继承TickerProvider，如果有多个AnimationController，则应该使用TickerProviderStateMixin。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_ScaleAnimationRouteState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">ScaleAnimationRoute</span>&gt;  <span class="title">with</span> <span class="title">SingleTickerProviderStateMixin</span></span>&#123; </span><br><span class="line"></span><br><span class="line">  Animation&lt;<span class="built_in">double</span>&gt; animation;</span><br><span class="line">  AnimationController controller;</span><br><span class="line"></span><br><span class="line">  initState() &#123;</span><br><span class="line">    <span class="keyword">super</span>.initState();</span><br><span class="line">    controller = <span class="keyword">new</span> AnimationController(</span><br><span class="line">        duration: <span class="keyword">const</span> <span class="built_in">Duration</span>(seconds: <span class="number">3</span>), vsync: <span class="keyword">this</span>);</span><br><span class="line">       <span class="comment">//使用弹性曲线</span></span><br><span class="line">    animation=CurvedAnimation(parent: controller, curve: Curves.bounceIn);</span><br><span class="line">    <span class="comment">//图片宽高从0变到300</span></span><br><span class="line">    animation = <span class="keyword">new</span> Tween(begin: <span class="number">0.0</span>, end: <span class="number">300.0</span>).animate(animation)</span><br><span class="line">      ..addListener(() &#123;</span><br><span class="line">        setState(()=&gt;&#123;&#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    <span class="comment">//启动动画(正向执行)</span></span><br><span class="line">    controller.forward();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Center(</span><br><span class="line">       child: Image.asset(<span class="string">"imgs/avatar.png"</span>,</span><br><span class="line">          width: animation.value,</span><br><span class="line">          height: animation.value</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  dispose() &#123;</span><br><span class="line">    <span class="comment">//路由销毁时需要释放动画资源</span></span><br><span class="line">    controller.dispose();</span><br><span class="line">    <span class="keyword">super</span>.dispose();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码中<code>addListener()</code>函数调用了<code>setState()</code>，所以每次动画生成一个新的数字时，当前帧被标记为脏(dirty)，这会导致widget的<code>build()</code>方法再次被调用，而在<code>build()</code>中，改变Image的宽高，因为它的高度和宽度现在使用的是<code>animation.value</code> ，所以就会逐渐放大。</p>
+<h5 id="AnimatedWidget"><a href="#AnimatedWidget" class="headerlink" title="AnimatedWidget"></a>AnimatedWidget</h5><p>通过<code>addListener()</code>和<code>setState()</code> 来更新UI这一步其实是通用的，如果每个动画中都加这么一句是比较繁琐的。<code>AnimatedWidget</code>类封装了调用<code>setState()</code>的细节，并允许我们将widget分离出来</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnimatedImage</span> <span class="keyword">extends</span> <span class="title">AnimatedWidget</span> </span>&#123;</span><br><span class="line">  AnimatedImage(&#123;Key key, Animation&lt;<span class="built_in">double</span>&gt; animation&#125;)</span><br><span class="line">      : <span class="keyword">super</span>(key: key, listenable: animation);</span><br><span class="line"></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">final</span> Animation&lt;<span class="built_in">double</span>&gt; animation = listenable;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Center(</span><br><span class="line">      child: Image.asset(<span class="string">"imgs/avatar.png"</span>,</span><br><span class="line">          width: animation.value,</span><br><span class="line">          height: animation.value</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>外部初始化动画</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">initState() &#123;</span><br><span class="line">    <span class="keyword">super</span>.initState();</span><br><span class="line">    controller = <span class="keyword">new</span> AnimationController(</span><br><span class="line">        duration: <span class="keyword">const</span> <span class="built_in">Duration</span>(seconds: <span class="number">3</span>), vsync: <span class="keyword">this</span>);</span><br><span class="line">    <span class="comment">//图片宽高从0变到300</span></span><br><span class="line">    animation = <span class="keyword">new</span> Tween(begin: <span class="number">0.0</span>, end: <span class="number">300.0</span>).animate(controller);</span><br><span class="line">    <span class="comment">//启动动画</span></span><br><span class="line">    controller.forward();</span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line"><span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> AnimatedImage(animation: animation,);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="AnimatedBuilder"><a href="#AnimatedBuilder" class="headerlink" title="AnimatedBuilder"></a>AnimatedBuilder</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@override</span></span><br><span class="line">Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> AnimatedBuilder(</span><br><span class="line">      animation: animation,</span><br><span class="line">      child: Image.asset(<span class="string">"images/avatar.png"</span>),</span><br><span class="line">      builder: (BuildContext ctx, Widget child) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Center(</span><br><span class="line">          child: Container(</span><br><span class="line">              height: animation.value, </span><br><span class="line">              width: animation.value, </span><br><span class="line">              child: child,</span><br><span class="line">          ),</span><br><span class="line">        );</span><br><span class="line">      &#125;,</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>不用显式的去添加帧监听器，然后再调用<code>setState()</code> 了，这个好处和<code>AnimatedWidget</code>是一样的。</li>
+<li>动画构建的范围缩小了，如果没有<code>builder</code>，<code>setState()</code>将会在父组件上下文中调用，这将会导致父组件的<code>build</code>方法重新调用；而有了<code>builder</code>之后，只会导致动画widget自身的<code>build</code>重新调用，避免不必要的rebuild。</li>
+<li>通过<code>AnimatedBuilder</code>可以封装常见的过渡效果来复用动画。</li>
+</ol>
+<h4 id="动画状态监听"><a href="#动画状态监听" class="headerlink" title="动画状态监听"></a>动画状态监听</h4><p>通过<code>Animation</code>的<code>addStatusListener()</code>方法来添加动画状态改变监听器</p>
+<table>
+<thead>
+<tr>
+<th>枚举值</th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dismissed</code></td>
+<td>动画在起始点停止</td>
+</tr>
+<tr>
+<td><code>forward</code></td>
+<td>动画正在正向执行</td>
+</tr>
+<tr>
+<td><code>reverse</code></td>
+<td>动画正在反向执行</td>
+</tr>
+<tr>
+<td><code>completed</code></td>
+<td>动画在终点停止</td>
+</tr>
+</tbody>
+</table>
+<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">animation.addStatusListener((status) &#123;</span><br><span class="line">      <span class="keyword">if</span> (status == AnimationStatus.completed) &#123;</span><br><span class="line">        <span class="comment">//动画执行结束时反向执行动画</span></span><br><span class="line">        controller.reverse();</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (status == AnimationStatus.dismissed) &#123;</span><br><span class="line">        <span class="comment">//动画恢复到初始状态时执行动画（正向）</span></span><br><span class="line">        controller.forward();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="路由切换动画"><a href="#路由切换动画" class="headerlink" title="路由切换动画"></a>路由切换动画</h4><h5 id="系统自带"><a href="#系统自带" class="headerlink" title="系统自带"></a>系统自带</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> Navigator.push(context, MaterialPageRoute(  </span><br><span class="line">   builder: (context)=&gt;PageB(),</span><br><span class="line"> ));</span><br><span class="line">CupertinoPageRoute  <span class="comment"><span class="markdown">///ios 风格</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Navigator.push(</span><br><span class="line">  context,</span><br><span class="line">  PageRouteBuilder(</span><br><span class="line">    transitionDuration: <span class="built_in">Duration</span>(milliseconds: <span class="number">500</span>), <span class="comment">//动画时间为500毫秒</span></span><br><span class="line">    pageBuilder: (BuildContext context, Animation animation,</span><br><span class="line">        Animation secondaryAnimation) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> FadeTransition(</span><br><span class="line">        <span class="comment">//使用渐隐渐入过渡,</span></span><br><span class="line">        opacity: animation,</span><br><span class="line">        child: PageB(), <span class="comment">//路由B</span></span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br><span class="line">  ),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>无论是<code>MaterialPageRoute</code>、<code>CupertinoPageRoute</code>，还是<code>PageRouteBuilder</code>，它们都继承自PageRoute类，而<code>PageRouteBuilder</code>其实只是<code>PageRoute</code>的一个包装，我们可以直接继承<code>PageRoute</code>类来实现自定义路由</p>
+<h4 id="Hero动画"><a href="#Hero动画" class="headerlink" title="Hero动画"></a>Hero动画</h4><p>简单来说Hero动画就是在路由切换时，有一个共享的widget可以在新旧路由间切换。由于共享的widget在新旧路由页面上的位置、外观可能有所差异，所以在路由切换时会从旧路逐渐过渡到新路由中的指定位置，这样就会产生一个Hero动画。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">child: Hero(</span><br><span class="line">          tag: <span class="string">"avatar"</span>, <span class="comment">//唯一标记，前后两个路由页Hero的tag必须相同</span></span><br><span class="line">          child: ClipOval(</span><br><span class="line">            child: Image.asset(</span><br><span class="line">              <span class="string">"images/sea.jpg"</span>,</span><br><span class="line">              width: <span class="number">50.0</span>,</span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeroAnimationRouteB</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Center(</span><br><span class="line">      child: Hero(</span><br><span class="line">          tag: <span class="string">"avatar"</span>, <span class="comment">//唯一标记，前后两个路由页Hero的tag必须相同</span></span><br><span class="line">          child: Image.asset(<span class="string">"images/avatar.png"</span>),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现Hero动画只需要用<code>Hero</code>组件将要共享的widget包装起来，并提供一个相同的tag即可</p>
+<h4 id="AnimatedSwitcher"><a href="#AnimatedSwitcher" class="headerlink" title="AnimatedSwitcher"></a>AnimatedSwitcher</h4><p>切换UI元素的场景动画</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">AnimatedSwitcher</span>(</span><br><span class="line">                <span class="attribute">duration</span>: const Duration(<span class="attribute">milliseconds</span>: <span class="number">500</span>),</span><br><span class="line">                <span class="attribute">transitionBuilder</span>: (Widget child, Animation&lt;double&gt; animation) &#123;</span><br><span class="line">                  <span class="comment">//执行缩放动画</span></span><br><span class="line">                  <span class="selector-tag">return</span> <span class="selector-tag">ScaleTransition</span>(<span class="attribute">child</span>: child, <span class="attribute">scale</span>: animation);</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="selector-tag">child</span>: <span class="selector-tag">Text</span>(</span><br><span class="line">                  <span class="string">'$_count'</span>,</span><br><span class="line">                  <span class="comment">//显示指定key，不同的key会被认为是不同的Text，这样才能执行动画</span></span><br><span class="line">                  <span class="attribute">key</span>: ValueKey&lt;int&gt;(_count),</span><br><span class="line">                  <span class="attribute">style</span>: Theme</span><br><span class="line">                      .of(context)</span><br><span class="line">                      .textTheme</span><br><span class="line">                      .headline4,</span><br><span class="line">                ),</span><br><span class="line">              ),</span><br></pre></td></tr></table></figure>
+<h4 id="动画过渡"><a href="#动画过渡" class="headerlink" title="动画过渡"></a>动画过渡</h4><h5 id="自定义-1"><a href="#自定义-1" class="headerlink" title="自定义"></a>自定义</h5><p>Flutter提供了一个<code>ImplicitlyAnimatedWidget</code>抽象类，它继承自StatefulWidget，同时提供了一个对应的<code>ImplicitlyAnimatedWidgetState</code>类，<code>AnimationController</code>的管理就在<code>ImplicitlyAnimatedWidgetState</code>类中。开发者如果要封装动画，只需要分别继承<code>ImplicitlyAnimatedWidget</code>和<code>ImplicitlyAnimatedWidgetState</code>类即可</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnimatedDecoratedBox</span> <span class="keyword">extends</span> <span class="title">ImplicitlyAnimatedWidget</span> </span>&#123;</span><br><span class="line">  AnimatedDecoratedBox(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.decoration,</span><br><span class="line">    <span class="keyword">this</span>.child,</span><br><span class="line">    Curve curve = Curves.linear, <span class="comment">//动画曲线</span></span><br><span class="line">    <span class="meta">@required</span> <span class="built_in">Duration</span> duration, <span class="comment">// 正向动画执行时长</span></span><br><span class="line">    <span class="built_in">Duration</span> reverseDuration, <span class="comment">// 反向动画执行时长</span></span><br><span class="line">  &#125;) : <span class="keyword">super</span>(</span><br><span class="line">          key: key,</span><br><span class="line">          curve: curve,</span><br><span class="line">          duration: duration,</span><br><span class="line">          reverseDuration: reverseDuration,</span><br><span class="line">        );</span><br><span class="line">  <span class="keyword">final</span> BoxDecoration decoration;</span><br><span class="line">  <span class="keyword">final</span> Widget child;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _AnimatedDecoratedBoxState createState() &#123;</span><br><span class="line">    <span class="keyword">return</span> _AnimatedDecoratedBoxState();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_AnimatedDecoratedBoxState</span></span></span><br><span class="line"><span class="class">    <span class="keyword">extends</span> <span class="title">AnimatedWidgetBaseState</span>&lt;<span class="title">AnimatedDecoratedBox</span>&gt; </span>&#123;</span><br><span class="line">  DecorationTween _decoration; <span class="comment">//定义一个Tween</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> DecoratedBox(</span><br><span class="line">      decoration: _decoration.evaluate(animation),</span><br><span class="line">      child: widget.child,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> forEachTween(visitor) &#123;</span><br><span class="line">    <span class="comment">// 在需要更新Tween时，基类会调用此方法</span></span><br><span class="line">    _decoration = visitor(_decoration, widget.decoration,</span><br><span class="line">        (value) =&gt; DecorationTween(begin: value));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="系统自带-1"><a href="#系统自带-1" class="headerlink" title="系统自带"></a>系统自带</h5><p>Flutter SDK中也预置了很多动画过渡组件，实现方式和大都和<code>AnimatedDecoratedBox</code>差不多</p>
+<table>
+<thead>
+<tr>
+<th>组件名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AnimatedPadding</td>
+<td>在padding发生变化时会执行过渡动画到新状态</td>
+</tr>
+<tr>
+<td>AnimatedPositioned</td>
+<td>配合Stack一起使用，当定位状态发生变化时会执行过渡动画到新的状态。</td>
+</tr>
+<tr>
+<td>AnimatedOpacity</td>
+<td>在透明度opacity发生变化时执行过渡动画到新状态</td>
+</tr>
+<tr>
+<td>AnimatedAlign</td>
+<td>当<code>alignment</code>发生变化时会执行过渡动画到新的状态。</td>
+</tr>
+<tr>
+<td>AnimatedContainer</td>
+<td>当Container属性发生变化时会执行过渡动画到新的状态。</td>
+</tr>
+<tr>
+<td>AnimatedDefaultTextStyle</td>
+<td>当字体样式发生变化时，子组件中继承了该样式的文本组件会动态过渡到新样式。</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flutter/" rel="tag"><i class="fa fa-tag"></i> Flutter</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/03/Flutter listview学习/" rel="next" title="Flutter listview学习">
+                <i class="fa fa-chevron-left"></i> Flutter listview学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/03/Flutter 路由/" rel="prev" title="Flutter 路由">
+                Flutter 路由 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/author.jpg" alt="Liang liu">
+            
+              <p class="site-author-name" itemprop="name">Liang liu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dddddl" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liouliang93@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Animation"><span class="nav-text">Animation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#AnimationController"><span class="nav-text">AnimationController</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Ticker"><span class="nav-text">Ticker</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Curve"><span class="nav-text">Curve</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Tween"><span class="nav-text">Tween</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动画基本结构"><span class="nav-text">动画基本结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基础版本"><span class="nav-text">基础版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#AnimatedWidget"><span class="nav-text">AnimatedWidget</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#AnimatedBuilder"><span class="nav-text">AnimatedBuilder</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动画状态监听"><span class="nav-text">动画状态监听</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#示例"><span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路由切换动画"><span class="nav-text">路由切换动画</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#系统自带"><span class="nav-text">系统自带</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义"><span class="nav-text">自定义</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hero动画"><span class="nav-text">Hero动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AnimatedSwitcher"><span class="nav-text">AnimatedSwitcher</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动画过渡"><span class="nav-text">动画过渡</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义-1"><span class="nav-text">自定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统自带-1"><span class="nav-text">系统自带</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liang liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="android,">
+  <meta name="keywords" content="Flutter,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Android 获取地理位置国家1. 通过TelephonyManager获取国家/地区代码12TelephonyManager tm = (TelephonyManager)this.getSystemService(this.TELEPHONY_SERVICE);String countryCodeValue = tm.getNetworkCountryIso(); 需要获取权限 2. 通过网">
-<meta name="keywords" content="android">
+<meta name="description" content="Fluro路由地址，只能传递String类型（并且不支持中文），所以需要对 中文，int,double,bool,自定义类型进行一个转换 缺点： 本地页面每次都需要进行类型转换。 需要注册和配置，相比于原生的路由框架多了一层 123456789101112131415161718192021void main() &amp;#123;  Router router = Router();  routes">
+<meta name="keywords" content="Flutter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android 获取地理位置国家">
-<meta property="og:url" content="http://yoursite.com/2019/10/29/Android 获取地理位置国家/index.html">
+<meta property="og:title" content="Fluro">
+<meta property="og:url" content="http://yoursite.com/2020/06/03/Fluro/index.html">
 <meta property="og:site_name" content="今晚吃烧烤">
-<meta property="og:description" content="Android 获取地理位置国家1. 通过TelephonyManager获取国家/地区代码12TelephonyManager tm = (TelephonyManager)this.getSystemService(this.TELEPHONY_SERVICE);String countryCodeValue = tm.getNetworkCountryIso(); 需要获取权限 2. 通过网">
+<meta property="og:description" content="Fluro路由地址，只能传递String类型（并且不支持中文），所以需要对 中文，int,double,bool,自定义类型进行一个转换 缺点： 本地页面每次都需要进行类型转换。 需要注册和配置，相比于原生的路由框架多了一层 123456789101112131415161718192021void main() &amp;#123;  Router router = Router();  routes">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-29T02:22:39.565Z">
+<meta property="og:updated_time" content="2020-06-03T02:15:14.448Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android 获取地理位置国家">
-<meta name="twitter:description" content="Android 获取地理位置国家1. 通过TelephonyManager获取国家/地区代码12TelephonyManager tm = (TelephonyManager)this.getSystemService(this.TELEPHONY_SERVICE);String countryCodeValue = tm.getNetworkCountryIso(); 需要获取权限 2. 通过网">
+<meta name="twitter:title" content="Fluro">
+<meta name="twitter:description" content="Fluro路由地址，只能传递String类型（并且不支持中文），所以需要对 中文，int,double,bool,自定义类型进行一个转换 缺点： 本地页面每次都需要进行类型转换。 需要注册和配置，相比于原生的路由框架多了一层 123456789101112131415161718192021void main() &amp;#123;  Router router = Router();  routes">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/29/Android 获取地理位置国家/">
+  <link rel="canonical" href="http://yoursite.com/2020/06/03/Fluro/">
 
 
 
 
 
-  <title>Android 获取地理位置国家 | 今晚吃烧烤</title>
+  <title>Fluro | 今晚吃烧烤</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/Android 获取地理位置国家/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/Fluro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liang liu">
@@ -270,7 +270,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Android 获取地理位置国家</h2>
+          <h2 class="post-title" itemprop="name headline">Fluro</h2>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-29T10:19:03+08:00">
-                2019-10-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-03T10:14:59+08:00">
+                2020-06-03
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android海外调研/" itemprop="url" rel="index">
-                    <span itemprop="name">android海外调研</span>
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
                   </a>
                 </span>
 
@@ -342,14 +342,22 @@
       
 
       
-        <h4 id="Android-获取地理位置国家"><a href="#Android-获取地理位置国家" class="headerlink" title="Android 获取地理位置国家"></a>Android 获取地理位置国家</h4><h6 id="1-通过TelephonyManager获取国家-地区代码"><a href="#1-通过TelephonyManager获取国家-地区代码" class="headerlink" title="1. 通过TelephonyManager获取国家/地区代码"></a>1. 通过TelephonyManager获取国家/地区代码</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TelephonyManager tm = (TelephonyManager)<span class="keyword">this</span>.getSystemService(<span class="keyword">this</span>.TELEPHONY_SERVICE);</span><br><span class="line">String countryCodeValue = tm.getNetworkCountryIso();</span><br></pre></td></tr></table></figure>
-<p>需要获取<uses-permission android:name="android.permission.READ_PHONE_STATE">权限</uses-permission></p>
-<h6 id="2-通过网络请求IP地址的外部接口"><a href="#2-通过网络请求IP地址的外部接口" class="headerlink" title="2. 通过网络请求IP地址的外部接口"></a>2. 通过网络请求IP地址的外部接口</h6><p>访问 <a href="http://ip-api.com/json" target="_blank" rel="noopener">http://ip-api.com/json</a> 之类的接口，它会根据IP地址自动检测设备返回位置详细信息的IP地址。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"status"</span>:<span class="string">"success"</span>,<span class="string">"country"</span>:<span class="string">"China"</span>,<span class="string">"countryCode"</span>:<span class="string">"CN"</span>,<span class="string">"region"</span>:<span class="string">"JS"</span>,<span class="string">"regionName"</span>:<span class="string">"Jiangsu"</span>,<span class="string">"city"</span>:<span class="string">"Suzhou"</span>,<span class="string">"zip"</span>:<span class="string">""</span>,<span class="string">"lat"</span>:<span class="number">31.2979</span>,<span class="string">"lon"</span>:<span class="number">120.594</span>,<span class="string">"timezone"</span>:<span class="string">"Asia/Shanghai"</span>,<span class="string">"isp"</span>:<span class="string">"Chinanet"</span>,<span class="string">"org"</span>:<span class="string">"Yaqi ELECTRON Technology Suzhou Co., ltd"</span>,<span class="string">"as"</span>:<span class="string">"AS4134 No.31,Jin-rong Street"</span>,<span class="string">"query"</span>:<span class="string">"58.211.36.118"</span>&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="3-通过GPS获取位置"><a href="#3-通过GPS获取位置" class="headerlink" title="3. 通过GPS获取位置"></a>3. 通过GPS获取位置</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);</span><br><span class="line">Criteria criteria = <span class="keyword">new</span> Criteria();</span><br><span class="line">criteria.setAccuracy(Criteria.ACCURACY_FINE);</span><br><span class="line">String provider = locationManager.getBestProvider(criteria,<span class="keyword">true</span>);</span><br><span class="line">Location curLocation = locationManager.getLastKnownLocation(provider);</span><br><span class="line">Geocoder geocoder = <span class="keyword">new</span> Geocoder(context, Locale.getDefault());</span><br><span class="line">List&lt;Address&gt; addresses = <span class="keyword">null</span>;</span><br><span class="line">    addresses = geocoder.getFromLocation((<span class="keyword">double</span>)curLocal.getLatitudeE6(),(<span class="keyword">double</span>)curLocal.getLongitudeE6(),<span class="number">1</span>);</span><br><span class="line">String countryCode= addresses.get(<span class="number">0</span>).getCountryCode();</span><br></pre></td></tr></table></figure>
-<p>需要获取<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION">权限</uses-permission></p>
-<h6 id="4-通过手机Locale获取国家"><a href="#4-通过手机Locale获取国家" class="headerlink" title="4. 通过手机Locale获取国家"></a>4. 通过手机Locale获取国家</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Locale locale = Locale.getDefault();</span><br><span class="line">locale.getCountry();</span><br></pre></td></tr></table></figure>
-<p>这种方法只能获取用户设置的国家位置。</p>
+        <hr>
+<p><code>Fluro</code>路由地址，只能传递<code>String</code>类型（并且不支持中文），所以需要对 中文，<code>int</code>,<code>double</code>,<code>bool</code>,自定义类型进行一个转换</p>
+<p>缺点：</p>
+<p>本地页面每次都需要进行类型转换。</p>
+<p>需要注册和配置，相比于原生的路由框架多了一层</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  Router router = Router();</span><br><span class="line">  routes.configureRoutes(router);</span><br><span class="line">  Application.router = router;</span><br><span class="line"></span><br><span class="line">  runApp(MyApp());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="comment">// This widget is the root of your application.</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">'Flutter Demo'</span>,</span><br><span class="line">      theme: ThemeData(</span><br><span class="line">        primarySwatch: Colors.blue,</span><br><span class="line">      ),</span><br><span class="line">      onGenerateRoute: Application.router.generator,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>采用 <code>onGenerateRoute</code>注册，导致无法做拦截操作了。</p>
+<p>优点：</p>
+<p>服务端配置路由地址，后台控制页面跳转。</p>
+<p>用uri 的方式可以统一协议，方便混合或者是多端开发。</p>
+<p>使用起来层次分明、方便扩展和便于整体管理路由。</p>
+<p>自带多种风格动画，包含android与ios动画，也可以自定义。</p>
+<p>统一注册</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">routes</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">String</span> root = <span class="string">"/"</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">String</span> home = <span class="string">"/home"</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">String</span> demoParams = <span class="string">"/deme_params"</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">String</span> returnParams = <span class="string">"/return_params"</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">String</span> transitionDemo = <span class="string">"/transitionDemo"</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">String</span> transitionCustomDemo = <span class="string">"/transitionCustomDemo"</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">String</span> transitionCupertinoDemo = <span class="string">"/transitionCupertinoDemo"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">void</span> configureRoutes(Router router) &#123;</span><br><span class="line">    router.notFoundHandler = <span class="keyword">new</span> Handler(</span><br><span class="line">        handlerFunc: (BuildContext context, <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;&gt; params) &#123;</span><br><span class="line">          <span class="built_in">print</span>(<span class="string">"ROUTE WAS NOT FOUND !!!"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 第一个参数是路由地址，第二个参数是页面跳转和传参，第三个参数是默认的转场动画，可以看上图</span></span><br><span class="line">    <span class="comment">/// 我这边先不设置默认的转场动画，转场动画在下面会讲，可以在另外一个地方设置（可以看NavigatorUtil类）</span></span><br><span class="line">    router.define(root, handler: splashHandler);</span><br><span class="line">    router.define(home, handler: homeHandler);</span><br><span class="line">    router.define(demoParams, handler: demoParamHandler);</span><br><span class="line">    router.define(returnParams, handler: returnParamHandler);</span><br><span class="line">    router.define(transitionDemo, handler: transitionDemoHandler);</span><br><span class="line">    router.define(transitionCustomDemo, handler: transitionDemoHandler);</span><br><span class="line">    router.define(transitionCupertinoDemo, handler: transitionDemoHandler);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Handler 统一处理</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 跳转到首页Splash</span></span><br><span class="line"><span class="keyword">var</span> splashHandler = <span class="keyword">new</span> Handler(</span><br><span class="line">    handlerFunc: (BuildContext context, <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;&gt; params) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> SplashPag();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 跳转到主页</span></span><br><span class="line"><span class="keyword">var</span> homeHandler = <span class="keyword">new</span> Handler(</span><br><span class="line">    handlerFunc: (BuildContext context, <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt;&gt; params) &#123;</span><br><span class="line">      <span class="keyword">return</span> MyHomePage(</span><br><span class="line">        title: <span class="string">"路由跳转"</span>,</span><br><span class="line">      );</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -377,7 +385,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android/" rel="tag"><i class="fa fa-tag"></i> android</a>
+            <a href="/tags/Flutter/" rel="tag"><i class="fa fa-tag"></i> Flutter</a>
           
         </div>
       
@@ -390,8 +398,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/06/OpenCV4Android-环境配置/" rel="next" title="OpenCV4Android 环境配置">
-                <i class="fa fa-chevron-left"></i> OpenCV4Android 环境配置
+              <a href="/2020/06/03/Flutter 路由/" rel="next" title="Flutter 路由">
+                <i class="fa fa-chevron-left"></i> Flutter 路由
               </a>
             
           </div>
@@ -400,8 +408,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/10/29/Google Play 支付调研/" rel="prev" title="Google Play 支付调研">
-                Google Play 支付调研 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/06/03/Flutter 屏幕适配/" rel="prev" title="Flutter 屏幕适配">
+                Flutter 屏幕适配 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -454,17 +462,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -542,22 +541,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android-获取地理位置国家"><span class="nav-text">Android 获取地理位置国家</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-通过TelephonyManager获取国家-地区代码"><span class="nav-text">1. 通过TelephonyManager获取国家/地区代码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-通过网络请求IP地址的外部接口"><span class="nav-text">2. 通过网络请求IP地址的外部接口</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-通过GPS获取位置"><span class="nav-text">3. 通过GPS获取位置</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-通过手机Locale获取国家"><span class="nav-text">4. 通过手机Locale获取国家</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

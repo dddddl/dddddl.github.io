@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Flutter,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="创建1flutter create --org com.example --template=plugin -i swift -a kotlin hello 将会在hello/目录里创建插件工程  1lib/hello.dart 插件包的Dart API.  1android/src/main/java/com/yourcompany/hello/HelloPlugin.java 插件包API的">
+<meta name="keywords" content="Flutter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter Plugins 学习">
+<meta property="og:url" content="http://yoursite.com/2020/06/03/Flutter Plugins/index.html">
+<meta property="og:site_name" content="今晚吃烧烤">
+<meta property="og:description" content="创建1flutter create --org com.example --template=plugin -i swift -a kotlin hello 将会在hello/目录里创建插件工程  1lib/hello.dart 插件包的Dart API.  1android/src/main/java/com/yourcompany/hello/HelloPlugin.java 插件包API的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-06-03T02:16:02.326Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter Plugins 学习">
+<meta name="twitter:description" content="创建1flutter create --org com.example --template=plugin -i swift -a kotlin hello 将会在hello/目录里创建插件工程  1lib/hello.dart 插件包的Dart API.  1android/src/main/java/com/yourcompany/hello/HelloPlugin.java 插件包API的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/06/03/Flutter Plugins/">
+
+
+
+
+
+  <title>Flutter Plugins 学习 | 今晚吃烧烤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">今晚吃烧烤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">随便写写</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/Flutter Plugins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang liu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/author.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="今晚吃烧烤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Flutter Plugins 学习</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-03T10:16:40+08:00">
+                2020-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h5 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h5><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter create --org com<span class="selector-class">.example</span> --template=plugin -<span class="selector-tag">i</span> swift -<span class="selector-tag">a</span> kotlin hello</span><br></pre></td></tr></table></figure>
+<p>将会在hello/目录里创建插件工程</p>
+<ul>
+<li><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">lib</span>/<span class="title">hello</span>.<span class="title">dart</span></span></span><br></pre></td></tr></table></figure>
+<p>插件包的Dart API.</p>
+</li>
+<li><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android<span class="regexp">/src/m</span>ain<span class="regexp">/java/</span>com<span class="regexp">/yourcompany/</span>hello<span class="regexp">/HelloPlugin.java</span></span><br></pre></td></tr></table></figure>
+<p>插件包API的Android实现.</p>
+</li>
+<li><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ios/Classes/HelloPlugin.m</span><br><span class="line">ios/Classes/HelloPlugin.h</span><br><span class="line">ios/Classes/SwiftHelloPlugin.swift</span><br></pre></td></tr></table></figure>
+<p>插件包API的ios实现.</p>
+</li>
+<li><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">example</span>/</span><br></pre></td></tr></table></figure>
+<p>一个依赖于该插件的Flutter应用程序，来说明如何使用它</p>
+</li>
+</ul>
+<h5 id="插件编写"><a href="#插件编写" class="headerlink" title="插件编写"></a>插件编写</h5><h6 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h6><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd hello/example`; `flutter build apk</span><br></pre></td></tr></table></figure>
+<p>让后打开example目录下android工程，工程会引入hello lib，修改hello lib内容已编写android端插件内容。</p>
+<h6 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h6><p>终端执行<code>cd hello/example</code>; <code>flutter build ios --no-codesign</code></p>
+<ol>
+<li>启动 Xcode</li>
+<li>选择 ‘File &gt; Open’, 然后选择 <code>hello/example/ios/Runner.xcworkspace</code> 文件.</li>
+</ol>
+<p>插件的iOS平台代码位于<code>Pods/DevelopmentPods/hello/Classes/</code>中。</p>
+<h6 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h6><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** HelloPlugin */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloPlugin</span>: <span class="type">FlutterPlugin</span>, <span class="type">MethodCallHandler &#123;</span></span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> channel : MethodChannel</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化MethodChannel 并添加回调 1.12后新增方法</span></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAttachedToEngine</span><span class="params">(<span class="meta">@NonNull</span> flutterPluginBinding: <span class="type">FlutterPlugin</span>.<span class="type">FlutterPluginBinding</span>)</span></span> &#123;</span><br><span class="line">    channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), <span class="string">"hello"</span>)</span><br><span class="line">    channel.setMethodCallHandler(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//兼容1.12之前</span></span><br><span class="line">  <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">    <span class="meta">@JvmStatic</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">registerWith</span><span class="params">(registrar: <span class="type">Registrar</span>)</span></span> &#123;</span><br><span class="line">      <span class="keyword">val</span> channel = MethodChannel(registrar.messenger(), <span class="string">"hello"</span>)</span><br><span class="line">      channel.setMethodCallHandler(HelloPlugin())</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//dart端调用回调</span></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onMethodCall</span><span class="params">(<span class="meta">@NonNull</span> call: <span class="type">MethodCall</span>, <span class="meta">@NonNull</span> result: <span class="type">Result</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (call.method == <span class="string">"getPlatformVersion"</span>) &#123;</span><br><span class="line">      result.success(<span class="string">"Android <span class="subst">$&#123;android.os.Build.VERSION.RELEASE&#125;</span>"</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result.notImplemented()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDetachedFromEngine</span><span class="params">(<span class="meta">@NonNull</span> binding: <span class="type">FlutterPlugin</span>.<span class="type">FlutterPluginBinding</span>)</span></span> &#123;</span><br><span class="line">    channel.setMethodCallHandler(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>dart端实现</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> MethodChannel _channel =</span><br><span class="line">      <span class="keyword">const</span> MethodChannel(<span class="string">'hello'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> Future&lt;<span class="built_in">String</span>&gt; <span class="keyword">get</span> platformVersion <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="built_in">String</span> version = <span class="keyword">await</span> _channel.invokeMethod(<span class="string">'getPlatformVersion'</span>);</span><br><span class="line">    <span class="keyword">return</span> version;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>Android 端开打图库示例</p>
+<p>在expmle android 项目中的AndroidManifest.xml中增加必要权限</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span> /&gt;</span><br><span class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.READ_EXTERNAL_STORAGE"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>引入权限插件</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">permission_handler</span>: ^4<span class="selector-class">.4</span><span class="selector-class">.0</span></span><br></pre></td></tr></table></figure>
+<p>申请权限</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="keyword">void</span>&gt; requestPermission() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;PermissionGroup, PermissionStatus&gt; permissions =</span><br><span class="line">  <span class="keyword">await</span> PermissionHandler().requestPermissions([</span><br><span class="line">    PermissionGroup.storage,</span><br><span class="line">  ]);</span><br><span class="line">  <span class="comment">//校验权限</span></span><br><span class="line">  <span class="keyword">if</span> (permissions[PermissionGroup.camera] != PermissionStatus.granted) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"无照相权限"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (permissions[PermissionGroup.storage] != PermissionStatus.granted) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"无读写权限"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样权限这块就搞定了。</p>
+<p>图片选择需要在onActivityResult中接收系统回调，所以在FlutterPlugin中集成并ActivityAware重写以下方法。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">override fun onDetachedFromActivity() &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">override fun onReattachedToActivityForConfigChanges(activityPluginBinding: ActivityPluginBinding) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">override fun onAttachedToActivity(binging: ActivityPluginBinding) &#123;</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">override fun onDetachedFromActivityForConfigChanges() &#123;</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在onAttachedToActivity中初始化</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.activity = activity</span><br><span class="line"><span class="keyword">this</span>.application = applicationContext</span><br><span class="line">    <span class="comment"><span class="markdown">///ImagePickerDelegate 处理onActivityResult回调</span></span></span><br><span class="line">delegate = ImagePickerDelegate(activity)</span><br><span class="line"></span><br><span class="line">Log.e(<span class="string">"wangfei=="</span>, <span class="string">"002"</span>)</span><br><span class="line">activityBinding!!.addActivityResultListener(delegate!!)</span><br><span class="line">activityBinding!!.addRequestPermissionsResultListener(delegate!!)</span><br><span class="line">channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), <span class="string">"flutterplugin"</span>)</span><br><span class="line">channel!!.setMethodCallHandler(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<p>在onMethodCall 方法中，监听选择图库照片的方法：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (call.method.equals(<span class="string">"getPhoto"</span>)) &#123;</span><br><span class="line">            val intent = Intent()</span><br><span class="line">            intent.addCategory(Intent.CATEGORY_OPENABLE)</span><br><span class="line">            intent.setType(<span class="string">"image/*"</span>)</span><br><span class="line">            <span class="keyword">if</span> (Build.VERSION.SDK_INT &lt; <span class="number">19</span>) &#123;</span><br><span class="line">                intent.action = Intent.ACTION_GET_CONTENT</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                intent.action = Intent.ACTION_OPEN_DOCUMENT</span><br><span class="line">            &#125;</span><br><span class="line">            activity.startActivityForResult(intent, IMAGE_REQUEST_CODE)</span><br><span class="line">                <span class="comment">//传递result， 向dart传递结果</span></span><br><span class="line">            delegate?.setResult(result)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>ImagePickerDelegate 继承PluginRegistry.ActivityResultListener,并在其onActivityResult中处理结果</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onActivityResult</span><span class="params">(requestCode: <span class="type">Int</span>, resultCode: <span class="type">Int</span>, <span class="keyword">data</span>: <span class="type">Intent</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        Log.e(<span class="string">"FileAndImagePicker"</span>, <span class="string">"onActivityResult"</span>)</span><br><span class="line">        <span class="keyword">if</span> (resultCode == Activity.RESULT_OK) &#123;</span><br><span class="line">            <span class="keyword">if</span> (requestCode == IMAGE_REQUEST_CODE) &#123;</span><br><span class="line">                <span class="keyword">var</span> imageUri = <span class="keyword">data</span>?.<span class="keyword">data</span></span><br><span class="line">				<span class="comment">//转换成真实地址</span></span><br><span class="line">                <span class="keyword">val</span> realPath = RealPathFromUriUtils.getRealPathFromUri(activity, imageUri)</span><br><span class="line">                result.success(realPath)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>dart中实现</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> Future&lt;<span class="built_in">String</span>&gt; <span class="keyword">get</span> platformVersion <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> version = <span class="keyword">await</span> _channel.invokeMethod(<span class="string">'getPhoto'</span>);</span><br><span class="line">  <span class="keyword">return</span> version;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FlatButton(onPressed: () &#123;</span><br><span class="line">                initPlatformState();</span><br><span class="line">              &#125;, child: Text(<span class="string">"点击打开图片"</span>),),</span><br><span class="line">              Image.file(File(_platformVersion))</span><br></pre></td></tr></table></figure>
+<p>Channel所支持的数据类型对照表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Dart</th>
+<th style="text-align:center">Android</th>
+<th style="text-align:center">iOS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">null</td>
+<td style="text-align:center">null</td>
+<td style="text-align:center">nil (NSNull when nested)</td>
+</tr>
+<tr>
+<td style="text-align:center">bool</td>
+<td style="text-align:center">java.lang.Boolean</td>
+<td style="text-align:center">NSNumber numberWithBool:</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">java.lang.Integer</td>
+<td style="text-align:center">NSNumber numberWithInt:</td>
+</tr>
+<tr>
+<td style="text-align:center">int, if 32 bits not enough</td>
+<td style="text-align:center">java.lang.Long</td>
+<td style="text-align:center">NSNumber numberWithLong:</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">java.lang.Double</td>
+<td style="text-align:center">NSNumber numberWithDouble:</td>
+</tr>
+<tr>
+<td style="text-align:center">String</td>
+<td style="text-align:center">java.lang.String</td>
+<td style="text-align:center">NSString</td>
+</tr>
+<tr>
+<td style="text-align:center">Uint8List</td>
+<td style="text-align:center">byte[]</td>
+<td style="text-align:center">FlutterStandardTypedData typedDataWithBytes:</td>
+</tr>
+<tr>
+<td style="text-align:center">Int32List</td>
+<td style="text-align:center">int[]</td>
+<td style="text-align:center">FlutterStandardTypedData typedDataWithInt32:</td>
+</tr>
+<tr>
+<td style="text-align:center">Int64List</td>
+<td style="text-align:center">long[]</td>
+<td style="text-align:center">FlutterStandardTypedData typedDataWithInt64:</td>
+</tr>
+<tr>
+<td style="text-align:center">Float64List</td>
+<td style="text-align:center">double[]</td>
+<td style="text-align:center">FlutterStandardTypedData typedDataWithFloat64:</td>
+</tr>
+<tr>
+<td style="text-align:center">List</td>
+<td style="text-align:center">java.util.ArrayList</td>
+<td style="text-align:center">NSArray</td>
+</tr>
+<tr>
+<td style="text-align:center">Map</td>
+<td style="text-align:center">java.util.HashMap</td>
+<td style="text-align:center">NSDictionary</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flutter/" rel="tag"><i class="fa fa-tag"></i> Flutter</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/03/Flutter 屏幕适配/" rel="next" title="Flutter 屏幕适配">
+                <i class="fa fa-chevron-left"></i> Flutter 屏幕适配
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/author.jpg" alt="Liang liu">
+            
+              <p class="site-author-name" itemprop="name">Liang liu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dddddl" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liouliang93@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建"><span class="nav-text">创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插件编写"><span class="nav-text">插件编写</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Android"><span class="nav-text">Android</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#IOS"><span class="nav-text">IOS</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#示例"><span class="nav-text">示例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liang liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
