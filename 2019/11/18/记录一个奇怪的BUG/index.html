@@ -358,7 +358,7 @@
 <p>在注释掉这段代码后，经测试发现，还是会引起上述异常</p>
 </li>
 <li><p>最终解决</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">MyApplication :</span> KApp()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyApplication : KApp()</span><br></pre></td></tr></table></figure>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//MyApplication</span></span><br><span class="line"><span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">var</span> applicationInstance: MyApplication? = <span class="literal">null</span></span><br><span class="line">        <span class="function"><span class="keyword">fun</span> <span class="title">getInstance</span><span class="params">()</span></span>: MyApplication &#123;</span><br><span class="line">            <span class="keyword">return</span> applicationInstance!!</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//KApp</span></span><br><span class="line"><span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">lateinit</span> <span class="keyword">var</span> app:KApp</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>在子类父类中都单例化了application，最终删除MyApplication中的相关代码后，测试发现不奔溃了。</p>
 <h6 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h6><p>愚蠢的一次BUG，撸代码要仔细啊！！</p>
@@ -495,7 +495,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

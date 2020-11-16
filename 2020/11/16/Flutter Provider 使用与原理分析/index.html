@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Flutter,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Provider 理解使用Flutter中官方推荐状态管理库 ChangeNotifierProvider两种创建方式：  1234/// ChangeNotifierProvider.value(///   value: new MyChangeNotifier(),///   child: .../// )  1234/// ChangeNotifierProvider(///   crea">
+<meta name="keywords" content="Flutter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Provider 使用与原理解析">
+<meta property="og:url" content="http://yoursite.com/2020/11/16/Flutter Provider 使用与原理分析/index.html">
+<meta property="og:site_name" content="今晚吃烧烤">
+<meta property="og:description" content="Provider 理解使用Flutter中官方推荐状态管理库 ChangeNotifierProvider两种创建方式：  1234/// ChangeNotifierProvider.value(///   value: new MyChangeNotifier(),///   child: .../// )  1234/// ChangeNotifierProvider(///   crea">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-11-16T09:00:45.117Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Provider 使用与原理解析">
+<meta name="twitter:description" content="Provider 理解使用Flutter中官方推荐状态管理库 ChangeNotifierProvider两种创建方式：  1234/// ChangeNotifierProvider.value(///   value: new MyChangeNotifier(),///   child: .../// )  1234/// ChangeNotifierProvider(///   crea">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/11/16/Flutter Provider 使用与原理分析/">
+
+
+
+
+
+  <title>Provider 使用与原理解析 | 今晚吃烧烤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">今晚吃烧烤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">随便写写</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/16/Flutter Provider 使用与原理分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liang liu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/author.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="今晚吃烧烤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Provider 使用与原理解析</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-16T17:01:02+08:00">
+                2020-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h3 id="Provider-理解使用"><a href="#Provider-理解使用" class="headerlink" title="Provider 理解使用"></a>Provider 理解使用</h3><p>Flutter中官方推荐状态管理库</p>
+<h4 id="ChangeNotifierProvider"><a href="#ChangeNotifierProvider" class="headerlink" title="ChangeNotifierProvider"></a>ChangeNotifierProvider</h4><p>两种创建方式：</p>
+<ul>
+<li><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// ChangeNotifierProvider.value(</span></span><br><span class="line"><span class="comment">///   value: new MyChangeNotifier(),</span></span><br><span class="line"><span class="comment">///   child: ...</span></span><br><span class="line"><span class="comment">/// )</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// ChangeNotifierProvider(</span></span><br><span class="line"><span class="comment">///   create: (_) =&gt; new MyChangeNotifier(),</span></span><br><span class="line"><span class="comment">///   child: ...</span></span><br><span class="line"><span class="comment">/// )</span></span><br></pre></td></tr></table></figure>
+<p>官方推荐第二种方式，第一种易容造成内存泄漏</p>
+</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyChangeNotifier</span> <span class="keyword">extends</span> <span class="title">ChangeNotifier</span> </span>&#123;</span><br><span class="line">  <span class="built_in">int</span> _counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">int</span> <span class="keyword">get</span> counter =&gt; _counter;</span><br><span class="line"></span><br><span class="line">  incrementCounter() &#123;</span><br><span class="line">    ++_counter;</span><br><span class="line">    notifyListeners();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHomePage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> title;</span><br><span class="line">  MyChangeNotifier notifier;</span><br><span class="line"></span><br><span class="line">  MyHomePage(&#123;Key key, <span class="keyword">this</span>.title&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"all build"</span>);</span><br><span class="line">    <span class="keyword">return</span> ChangeNotifierProvider(</span><br><span class="line">      create: (_) =&gt; MyChangeNotifier(),</span><br><span class="line">      child: Scaffold(</span><br><span class="line">        appBar: AppBar(</span><br><span class="line">          title: Text(title),</span><br><span class="line">        ),</span><br><span class="line">        body: Consumer&lt;MyChangeNotifier&gt;(</span><br><span class="line">          builder: (_, localNotifier, child) &#123;</span><br><span class="line">            notifier = localNotifier;</span><br><span class="line">            <span class="keyword">return</span> Test2Widget(</span><br><span class="line">              localNotifier: localNotifier,</span><br><span class="line">              child: child,</span><br><span class="line">            );</span><br><span class="line">          &#125;,</span><br><span class="line">          child: TestWidget(),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test2Widget</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> MyChangeNotifier localNotifier;</span><br><span class="line">  <span class="keyword">final</span> Widget child;</span><br><span class="line"></span><br><span class="line">  Test2Widget(&#123;Key key, <span class="keyword">this</span>.localNotifier, <span class="keyword">this</span>.child&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Test2Widget build"</span>);</span><br><span class="line">    <span class="keyword">return</span> Center(</span><br><span class="line">        child: Column(</span><br><span class="line">      mainAxisAlignment: MainAxisAlignment.center,</span><br><span class="line">      children: &lt;Widget&gt;[</span><br><span class="line">        Text(</span><br><span class="line">          <span class="string">'You have pushed the button this many times:'</span>,</span><br><span class="line">        ),</span><br><span class="line">        Text(</span><br><span class="line">          <span class="string">'<span class="subst">$&#123;localNotifier.counter&#125;</span>'</span>,</span><br><span class="line">          style: Theme.of(context).textTheme.headline4,</span><br><span class="line">        ),</span><br><span class="line">        Test3Widget(</span><br><span class="line">          localNotifier: localNotifier,</span><br><span class="line">        ),</span><br><span class="line">        child,</span><br><span class="line">      ],</span><br><span class="line">    ));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// notifier.incrementCounter</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestWidget</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"TestWidget"</span>);</span><br><span class="line">    <span class="keyword">return</span> Text(<span class="string">'fdfdfdfdfdfdf'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test3Widget</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> MyChangeNotifier localNotifier;</span><br><span class="line"></span><br><span class="line">  Test3Widget(&#123;Key key, <span class="keyword">this</span>.localNotifier&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Test3Widget"</span>);</span><br><span class="line">    <span class="keyword">return</span> GestureDetector(</span><br><span class="line">      onTap: localNotifier.incrementCounter,</span><br><span class="line">      child: Text(<span class="string">'sdfsdfdsfdsafdafdsafdasf'</span>),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Consumer 可以缩小build重构得范围，当MyChangeNotifier 的值发生改变，只会重新build Consumer内部的Widget，不希望改变的Widget可以借助child 来创建。</p>
+<p>根据其特性，可以封装一个我们希望只在内部rebuild的Widget</p>
+<h4 id="简单封装"><a href="#简单封装" class="headerlink" title="简单封装"></a>简单封装</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> MyValueWidgetBuilder&lt;T&gt; = Widget <span class="built_in">Function</span>(BuildContext context, T value, Widget child);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProviderWidget</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">ChangeNotifier</span>&gt; <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> MyValueWidgetBuilder&lt;T&gt; builder;<span class="comment">///根据model状态构建页面</span></span><br><span class="line">  <span class="keyword">final</span> T model;<span class="comment">///你的model</span></span><br><span class="line">  <span class="keyword">final</span> Widget child;<span class="comment">///此child 为stateless 可以视具体情况使用（一般用不到）</span></span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">Function</span>(T) onModelReady;<span class="comment">///model创建好后会调用此方法，根据需要传入</span></span><br><span class="line"></span><br><span class="line">  ProviderWidget(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.builder,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.model,</span><br><span class="line">    <span class="keyword">this</span>.child,</span><br><span class="line">    <span class="keyword">this</span>.onModelReady,</span><br><span class="line">  &#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  _ProviderWidgetState&lt;T&gt; createState() =&gt; _ProviderWidgetState&lt;T&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_ProviderWidgetState</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">ChangeNotifier</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">ProviderWidget</span>&lt;<span class="title">T</span>&gt;&gt; </span>&#123;</span><br><span class="line">  T model;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> initState() &#123;</span><br><span class="line">    model = widget.model;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (widget.onModelReady != <span class="keyword">null</span>) &#123;</span><br><span class="line">      widget.onModelReady(model);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">super</span>.initState();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> ChangeNotifierProvider&lt;T&gt;(</span><br><span class="line">      create: (context) =&gt; model,</span><br><span class="line">      child: Consumer&lt;T&gt;(</span><br><span class="line">        builder: widget.builder,</span><br><span class="line">        child: widget.child,</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p><code>provider</code>基于<code>flutter</code> <code>framework</code>中 <code>InheritedWidget</code>组件，利用其可以自上而下通知子<code>Widget</code>的特性封装了一套简洁、高效的框架。</p>
+<h5 id="InheritedWidget"><a href="#InheritedWidget" class="headerlink" title="InheritedWidget"></a>InheritedWidget</h5><p><code>InheritedWidget</code>如何实现的自上而下通知？</p>
+<p>这是InheritedWidget的构造方法，很简单就创建InheritedElement 和判断是否需要更新通知</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">InheritedWidget</span> <span class="keyword">extends</span> <span class="title">ProxyWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> InheritedWidget(&#123; Key key, Widget child &#125;)</span><br><span class="line">    : <span class="keyword">super</span>(key: key, child: child);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  InheritedElement createElement() =&gt; InheritedElement(<span class="keyword">this</span>);</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 判断是否需要通知</span></span><br><span class="line">  <span class="meta">@protected</span></span><br><span class="line">  <span class="built_in">bool</span> updateShouldNotify(covariant InheritedWidget oldWidget);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们接下来看下<code>InhertedElement</code>都干了些什么</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InheritedElement</span> <span class="keyword">extends</span> <span class="title">ProxyElement</span> </span>&#123;</span><br><span class="line">	<span class="comment">///将InheritWidget 赋值给父类， Element中的widget</span></span><br><span class="line">  InheritedElement(InheritedWidget widget) : <span class="keyword">super</span>(widget);</span><br><span class="line">	<span class="comment">/// 持有InheritWidget的</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  InheritedWidget <span class="keyword">get</span> widget =&gt; <span class="keyword">super</span>.widget <span class="keyword">as</span> InheritedWidget;</span><br><span class="line">	<span class="comment">/// 创建了一个以Element为key的依赖map，里面干的是所有持有InheritWidget中共享元素的Element</span></span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">Map</span>&lt;<span class="built_in">Element</span>, <span class="built_in">Object</span>&gt; _dependents = HashMap&lt;<span class="built_in">Element</span>, <span class="built_in">Object</span>&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">///需要注意的是_updateInheritance方法，这里在其父类Element初始化时候，调用内部mount方法，如果父类存有_inheritedWidgets,则将父类的		_inheritedWidgets 复制给当前element。 这样下面每一层element都持有上一层的_InheritedWidget，这就是为什么_inheritedWidget能自上而下传递数据的原因。</span></span><br><span class="line">   <span class="comment">///   void _updateInheritance() &#123;</span></span><br><span class="line">   <span class="comment">///   	assert(_active);</span></span><br><span class="line">   <span class="comment">///   	_inheritedWidgets = _parent?._inheritedWidgets;</span></span><br><span class="line">   <span class="comment">///   &#125;</span></span><br><span class="line">    <span class="comment">/// 重写该方法，将自身添加进去</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> _updateInheritance() &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_active);</span><br><span class="line">    <span class="keyword">final</span> <span class="built_in">Map</span>&lt;<span class="built_in">Type</span>, InheritedElement&gt; incomingWidgets = _parent?._inheritedWidgets;</span><br><span class="line">    <span class="keyword">if</span> (incomingWidgets != <span class="keyword">null</span>)</span><br><span class="line">      _inheritedWidgets = HashMap&lt;<span class="built_in">Type</span>, InheritedElement&gt;.from(incomingWidgets);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      _inheritedWidgets = HashMap&lt;<span class="built_in">Type</span>, InheritedElement&gt;();</span><br><span class="line">    _inheritedWidgets[widget.runtimeType] = <span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@protected</span></span><br><span class="line">  <span class="built_in">Object</span> getDependencies(<span class="built_in">Element</span> dependent) &#123;</span><br><span class="line">    <span class="keyword">return</span> _dependents[dependent];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@protected</span></span><br><span class="line">  <span class="keyword">void</span> setDependencies(<span class="built_in">Element</span> dependent, <span class="built_in">Object</span> value) &#123;</span><br><span class="line">    _dependents[dependent] = value;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">   <span class="comment">/// 调用值得时候，将自身element依赖存入祖先InheritedElement的_dependents中</span></span><br><span class="line">  <span class="meta">@protected</span></span><br><span class="line">  <span class="keyword">void</span> updateDependencies(<span class="built_in">Element</span> dependent, <span class="built_in">Object</span> aspect) &#123;</span><br><span class="line">    setDependencies(dependent, <span class="keyword">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@protected</span></span><br><span class="line">  <span class="keyword">void</span> notifyDependent(covariant InheritedWidget oldWidget, <span class="built_in">Element</span> dependent) &#123;</span><br><span class="line">      <span class="comment">///stateful的didChangeDependencies。 其具体实现在父类Element中</span></span><br><span class="line">    dependent.didChangeDependencies();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">///当共享数据变化的时候，调用。 更加继承的updateShouldNotify方法判断是否进行更新</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> updated(InheritedWidget oldWidget) &#123;</span><br><span class="line">    <span class="keyword">if</span> (widget.updateShouldNotify(oldWidget))</span><br><span class="line">        <span class="comment">///父类方法调用notifyClients</span></span><br><span class="line">      <span class="keyword">super</span>.updated(oldWidget);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> notifyClients(InheritedWidget oldWidget) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_debugCheckOwnerBuildTargetExists(<span class="string">'notifyClients'</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">final</span> <span class="built_in">Element</span> dependent <span class="keyword">in</span> _dependents.keys) &#123;</span><br><span class="line">        <span class="comment">///通知所有依赖的Widget</span></span><br><span class="line">      notifyDependent(oldWidget, dependent);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过上述就清楚了为什么可以自上而下通知，因为其子类每一层都持有了上层的<code>_InheritedWidget</code>的引用。</p>
+<p>当其子孙调用获取<code>InheritedWidget</code>中的共享数据时，就会将自身添加到<code>InheritedWidget</code>中的<code>_dependents</code>中，这样当数据发生变化时，就可以通知到子类，让其rebuild。我们来看下取数据方法。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BuildContext</span> </span>&#123;</span><br><span class="line">	T dependOnInheritedWidgetOfExactType&lt;T <span class="keyword">extends</span> InheritedWidget&gt;(&#123; <span class="built_in">Object</span> aspect &#125;);</span><br><span class="line">    </span><br><span class="line">    InheritedWidget dependOnInheritedElement(InheritedElement ancestor, &#123; <span class="built_in">Object</span> aspect &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该方法为<code>BuildContext</code>中的接口方法，在<code>Element</code>中具体实现。传入继承<code>InheritedWidget</code>的类，首先会去<code>_inheritedWidgets</code>中查找是否包含。然后调用<code>dependOnInheritedElement</code>方法。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Element</span> <span class="keyword">extends</span> <span class="title">DiagnosticableTree</span> <span class="keyword">implements</span> <span class="title">BuildContext</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">Map</span>&lt;<span class="built_in">Type</span>, InheritedElement&gt; _inheritedWidgets;</span><br><span class="line">  <span class="built_in">Set</span>&lt;InheritedElement&gt; _dependencies;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">T dependOnInheritedWidgetOfExactType&lt;T <span class="keyword">extends</span> InheritedWidget&gt;(&#123;<span class="built_in">Object</span> aspect&#125;) &#123;</span><br><span class="line">  <span class="keyword">assert</span>(_debugCheckStateIsActiveForAncestorLookup());</span><br><span class="line">  <span class="keyword">final</span> InheritedElement ancestor = _inheritedWidgets == <span class="keyword">null</span> ? <span class="keyword">null</span> : _inheritedWidgets[T];</span><br><span class="line">  <span class="keyword">if</span> (ancestor != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(ancestor <span class="keyword">is</span> InheritedElement);</span><br><span class="line">    <span class="keyword">return</span> dependOnInheritedElement(ancestor, aspect: aspect) <span class="keyword">as</span> T;</span><br><span class="line">  &#125;</span><br><span class="line">  _hadUnsatisfiedDependencies = <span class="keyword">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">///将inheritedelement存入_dependencies中,调用其updateDependencies并返回widget</span></span><br><span class="line">      <span class="meta">@override</span></span><br><span class="line">  InheritedWidget dependOnInheritedElement(InheritedElement ancestor, &#123; <span class="built_in">Object</span> aspect &#125;) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(ancestor != <span class="keyword">null</span>);</span><br><span class="line">    _dependencies ??= HashSet&lt;InheritedElement&gt;();</span><br><span class="line">    _dependencies.add(ancestor);</span><br><span class="line">    ancestor.updateDependencies(<span class="keyword">this</span>, aspect);   <span class="comment">/// 将自身element应用存入，回到上方InheritedElement中</span></span><br><span class="line">    <span class="keyword">return</span> ancestor.widget;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">      <span class="meta">@mustCallSuper</span></span><br><span class="line">  <span class="keyword">void</span> didChangeDependencies() &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_active); <span class="comment">// otherwise markNeedsBuild is a no-op</span></span><br><span class="line">    <span class="keyword">assert</span>(_debugCheckOwnerBuildTargetExists(<span class="string">'didChangeDependencies'</span>));</span><br><span class="line">    markNeedsBuild();  <span class="comment">//该标记表示该Widget要重新build。</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a>Provider</h5><p>把使用的代码再贴下</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHomePage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> title;</span><br><span class="line">  MyChangeNotifier notifier;</span><br><span class="line"></span><br><span class="line">  MyHomePage(&#123;Key key, <span class="keyword">this</span>.title&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"all build"</span>);</span><br><span class="line">    <span class="keyword">return</span> ChangeNotifierProvider(</span><br><span class="line">      create: (_) =&gt; MyChangeNotifier(),</span><br><span class="line">      child: Scaffold(</span><br><span class="line">        appBar: AppBar(</span><br><span class="line">          title: Text(title),</span><br><span class="line">        ),</span><br><span class="line">        body: Consumer&lt;MyChangeNotifier&gt;(</span><br><span class="line">          builder: (_, localNotifier, child) &#123;</span><br><span class="line">            notifier = localNotifier;</span><br><span class="line">            <span class="keyword">return</span> Test2Widget(</span><br><span class="line">              localNotifier: localNotifier,</span><br><span class="line">              child: child,</span><br><span class="line">            );</span><br><span class="line">          &#125;,</span><br><span class="line">          child: TestWidget(),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先用<code>ChangeNotifierProvider</code>包裹，后在子类调用的地方用<code>Consumer</code>,先看下ChangeNotifierProvider实现。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///接受一个继承ChangeNotifier的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChangeNotifierProvider</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">ChangeNotifier</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">extends</span> <span class="title">ListenableProvider</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">void</span> _dispose(BuildContext context, ChangeNotifier notifier) &#123;</span><br><span class="line">    notifier?.dispose();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// Creates a [ChangeNotifier] using `create` and automatically</span></span><br><span class="line">  <span class="comment">/// dispose it when [ChangeNotifierProvider] is removed from the widget tree.</span></span><br><span class="line">  <span class="comment">///</span></span><br><span class="line">  <span class="comment">/// `create` must not be `null`.</span></span><br><span class="line">  ChangeNotifierProvider(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> Create&lt;T&gt; create,</span><br><span class="line">    <span class="built_in">bool</span> lazy,</span><br><span class="line">    TransitionBuilder builder,</span><br><span class="line">    Widget child,</span><br><span class="line">  &#125;) : <span class="keyword">super</span>(</span><br><span class="line">          key: key,</span><br><span class="line">          create: create,</span><br><span class="line">          dispose: _dispose,</span><br><span class="line">          lazy: lazy,</span><br><span class="line">          builder: builder,</span><br><span class="line">          child: child,</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再跟入<code>ListenableProvider</code>，这个类主要是添加监听者和回调</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListenableProvider</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Listenable</span>&gt; <span class="keyword">extends</span> <span class="title">InheritedProvider</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">  ListenableProvider(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> Create&lt;T&gt; create,</span><br><span class="line">    Dispose&lt;T&gt; dispose,</span><br><span class="line">    <span class="built_in">bool</span> lazy,</span><br><span class="line">    TransitionBuilder builder,</span><br><span class="line">    Widget child,</span><br><span class="line">  &#125;)  : <span class="keyword">assert</span>(create != <span class="keyword">null</span>),</span><br><span class="line">        <span class="keyword">super</span>(</span><br><span class="line">          key: key,</span><br><span class="line">          startListening: _startListening, <span class="comment">// 增加监听者回调</span></span><br><span class="line">          create: create,</span><br><span class="line">          dispose: dispose,</span><br><span class="line">          debugCheckInvalidValueType: kReleaseMode</span><br><span class="line">              ? <span class="keyword">null</span></span><br><span class="line">              : (value) &#123;</span><br><span class="line">                  <span class="keyword">if</span> (value <span class="keyword">is</span> ChangeNotifier) &#123;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">          lazy: lazy,</span><br><span class="line">          builder: builder,</span><br><span class="line">          child: child,</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> VoidCallback _startListening(</span><br><span class="line">    InheritedContext&lt;Listenable&gt; e,</span><br><span class="line">    Listenable value,</span><br><span class="line">  ) &#123;</span><br><span class="line">    value?.addListener(e.markNeedsNotifyDependents);   <span class="comment">// 增加监听者回调</span></span><br><span class="line">    <span class="keyword">return</span> () =&gt; value?.removeListener(e.markNeedsNotifyDependents);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>ListenableProvider</code>继承<code>InheritedProvider</code>，看到Inherited可能就要到我们刚刚上面分析的<code>InheritedWidget</code>中了，继续跟下去。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InheritedProvider</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">SingleChildStatelessWidget</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  InheritedProvider(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    Create&lt;T&gt; create,</span><br><span class="line">    T update(BuildContext context, T value),</span><br><span class="line">    UpdateShouldNotify&lt;T&gt; updateShouldNotify,</span><br><span class="line">    <span class="keyword">void</span> <span class="built_in">Function</span>(T value) debugCheckInvalidValueType,</span><br><span class="line">    StartListening&lt;T&gt; startListening,</span><br><span class="line">    Dispose&lt;T&gt; dispose,</span><br><span class="line">    <span class="keyword">this</span>.builder,</span><br><span class="line">    <span class="built_in">bool</span> lazy,</span><br><span class="line">    Widget child,</span><br><span class="line">  &#125;)  : _lazy = lazy,</span><br><span class="line">    	<span class="comment">///代理类，对传过来的参数model，监听等封装（没有仔细研究）</span></span><br><span class="line">        _delegate = _CreateInheritedProvider(</span><br><span class="line">          create: create,</span><br><span class="line">          update: update,</span><br><span class="line">          updateShouldNotify: updateShouldNotify,</span><br><span class="line">          debugCheckInvalidValueType: debugCheckInvalidValueType,</span><br><span class="line">          startListening: startListening,</span><br><span class="line">          dispose: dispose,</span><br><span class="line">        ),</span><br><span class="line">        <span class="keyword">super</span>(key: key, child: child);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  InheritedProvider._constructor(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    _Delegate&lt;T&gt; delegate,</span><br><span class="line">    <span class="built_in">bool</span> lazy,</span><br><span class="line">    <span class="keyword">this</span>.builder,</span><br><span class="line">    Widget child,</span><br><span class="line">  &#125;)  : _lazy = lazy,</span><br><span class="line">        _delegate = delegate,</span><br><span class="line">        <span class="keyword">super</span>(key: key, child: child);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">final</span> _Delegate&lt;T&gt; _delegate;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">bool</span> _lazy;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">final</span> TransitionBuilder builder;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> debugFillProperties(DiagnosticPropertiesBuilder properties) &#123;</span><br><span class="line">    <span class="keyword">super</span>.debugFillProperties(properties);</span><br><span class="line">    _delegate.debugFillProperties(properties);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _InheritedProviderElement&lt;T&gt; createElement() &#123;</span><br><span class="line">    <span class="keyword">return</span> _InheritedProviderElement&lt;T&gt;(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">///返回一个_InheritedProviderScope 并把自身引用传入其中</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget buildWithChild(BuildContext context, Widget child) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(</span><br><span class="line">      builder != <span class="keyword">null</span> || child != <span class="keyword">null</span>,</span><br><span class="line">      <span class="string">'<span class="subst">$runtimeType</span> used outside of MultiProvider must specify a child'</span>,</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> _InheritedProviderScope&lt;T&gt;(</span><br><span class="line">      owner: <span class="keyword">this</span>,</span><br><span class="line">      child: builder != <span class="keyword">null</span></span><br><span class="line">          ? Builder(</span><br><span class="line">              builder: (context) =&gt; builder(context, child),</span><br><span class="line">            )</span><br><span class="line">          : child,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>继续跟进<code>_InheritedProviderScope</code>中，看到了熟悉的对象<code>InheritedWidget</code>，那么上面的<code>InheritedProvider&lt;T&gt;</code>就是我们真正在<code>InheritedWidget</code>中的共享对象，且其持有了外部的一些引用，<code>_delegate</code>代理实现方式。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_InheritedProviderScope</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">InheritedWidget</span> </span>&#123;</span><br><span class="line">  _InheritedProviderScope(&#123;</span><br><span class="line">    <span class="keyword">this</span>.owner,</span><br><span class="line">    <span class="meta">@required</span> Widget child,</span><br><span class="line">  &#125;) : <span class="keyword">super</span>(child: child);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">final</span> InheritedProvider&lt;T&gt; owner;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="built_in">bool</span> updateShouldNotify(InheritedWidget oldWidget) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 继承InheritedElement，重写封装一些方法。</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _InheritedProviderScopeElement&lt;T&gt; createElement() &#123;</span><br><span class="line">    <span class="keyword">return</span> _InheritedProviderScopeElement&lt;T&gt;(<span class="keyword">this</span>);  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来我们看<code>Consumer</code>如何实现</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Consumer</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">SingleChildStatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// &#123;@template provider.consumer.constructor&#125;</span></span><br><span class="line">  <span class="comment">/// Consumes a [Provider&lt;T&gt;]</span></span><br><span class="line">  <span class="comment">/// &#123;@endtemplate&#125;</span></span><br><span class="line">  Consumer(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.builder,</span><br><span class="line">    Widget child,</span><br><span class="line">  &#125;)  : <span class="keyword">assert</span>(builder != <span class="keyword">null</span>),</span><br><span class="line">        <span class="keyword">super</span>(key: key, child: child);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// &#123;@template provider.consumer.builder&#125;</span></span><br><span class="line">  <span class="comment">/// Build a widget tree based on the value from a [Provider&lt;T&gt;].</span></span><br><span class="line">  <span class="comment">///</span></span><br><span class="line">  <span class="comment">/// Must not be `null`.</span></span><br><span class="line">  <span class="comment">/// &#123;@endtemplate&#125;</span></span><br><span class="line">  <span class="keyword">final</span> Widget <span class="built_in">Function</span>(BuildContext context, T value, Widget child) builder;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget buildWithChild(BuildContext context, Widget child) &#123;</span><br><span class="line">    <span class="keyword">return</span> builder(</span><br><span class="line">      context,</span><br><span class="line">      Provider.of&lt;T&gt;(context),</span><br><span class="line">      child,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考上述使用方法，在builder回调中，使用Provider.of<t>(context)返回的Model来渲染页面。 那么Provider.of<t>(context) 中应该是获取IneritedWidget的方法。</t></t></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Provider</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">InheritedProvider</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">      <span class="keyword">static</span> T of&lt;T&gt;(BuildContext context, &#123;<span class="built_in">bool</span> listen = <span class="keyword">true</span>&#125;) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> inheritedElement = _inheritedElementOf&lt;T&gt;(context);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (listen) &#123;</span><br><span class="line">      context.dependOnInheritedElement(inheritedElement);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> inheritedElement.value;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> _InheritedProviderScopeElement&lt;T&gt; _inheritedElementOf&lt;T&gt;(</span><br><span class="line">    BuildContext context,</span><br><span class="line">  ) &#123;</span><br><span class="line">    _InheritedProviderScopeElement&lt;T&gt; inheritedElement;</span><br><span class="line"></span><br><span class="line">      <span class="comment">///果然这里获取了_InheritedProviderScope&lt;T&gt;</span></span><br><span class="line">    <span class="keyword">if</span> (context.widget <span class="keyword">is</span> _InheritedProviderScope&lt;T&gt;) &#123;</span><br><span class="line">     </span><br><span class="line">      context.visitAncestorElements((parent) &#123;</span><br><span class="line">        inheritedElement = parent.getElementForInheritedWidgetOfExactType&lt;</span><br><span class="line">            _InheritedProviderScope&lt;T&gt;&gt;() <span class="keyword">as</span> _InheritedProviderScopeElement&lt;T&gt;;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      inheritedElement = context.getElementForInheritedWidgetOfExactType&lt;</span><br><span class="line">          _InheritedProviderScope&lt;T&gt;&gt;() <span class="keyword">as</span> _InheritedProviderScopeElement&lt;T&gt;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (inheritedElement == <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> ProviderNotFoundException(T, context.widget.runtimeType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> inheritedElement;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后看下<code>ChangeNotifier</code>实现方式</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChangeNotifier</span> <span class="keyword">implements</span> <span class="title">Listenable</span> </span>&#123;</span><br><span class="line">  ObserverList&lt;VoidCallback&gt; _listeners = ObserverList&lt;VoidCallback&gt;();</span><br><span class="line">    </span><br><span class="line">  <span class="meta">@protected</span></span><br><span class="line">  <span class="built_in">bool</span> <span class="keyword">get</span> hasListeners &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_debugAssertNotDisposed());</span><br><span class="line">    <span class="keyword">return</span> _listeners.isNotEmpty;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// Register a closure to be called when the object changes.</span></span><br><span class="line">  <span class="comment">///</span></span><br><span class="line">  <span class="comment">/// This method must not be called after [dispose] has been called.</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> addListener(VoidCallback listener) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_debugAssertNotDisposed());</span><br><span class="line">    _listeners.add(listener);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> removeListener(VoidCallback listener) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_debugAssertNotDisposed());</span><br><span class="line">    _listeners.remove(listener);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@mustCallSuper</span></span><br><span class="line">  <span class="keyword">void</span> dispose() &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_debugAssertNotDisposed());</span><br><span class="line">    _listeners = <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="meta">@protected</span></span><br><span class="line">  <span class="meta">@visibleForTesting</span></span><br><span class="line">  <span class="keyword">void</span> notifyListeners() &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_debugAssertNotDisposed());</span><br><span class="line">    <span class="keyword">if</span> (_listeners != <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">final</span> <span class="built_in">List</span>&lt;VoidCallback&gt; localListeners = <span class="built_in">List</span>&lt;VoidCallback&gt;.from(_listeners);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">final</span> VoidCallback listener <span class="keyword">in</span> localListeners) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (_listeners.contains(listener))</span><br><span class="line">            listener();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (exception, stack) &#123;</span><br><span class="line">          FlutterError.reportError(FlutterErrorDetails(</span><br><span class="line">            exception: exception,</span><br><span class="line">            stack: stack,</span><br><span class="line">            <span class="keyword">library</span>: <span class="string">'foundation library'</span>,</span><br><span class="line">            context: ErrorDescription(<span class="string">'while dispatching notifications for <span class="subst">$runtimeType</span>'</span>),</span><br><span class="line">            informationCollector: () <span class="keyword">sync</span>* &#123;</span><br><span class="line">              <span class="keyword">yield</span> DiagnosticsProperty&lt;ChangeNotifier&gt;(</span><br><span class="line">                <span class="string">'The <span class="subst">$runtimeType</span> sending notification was'</span>,</span><br><span class="line">                <span class="keyword">this</span>,</span><br><span class="line">                style: DiagnosticsTreeStyle.errorProperty,</span><br><span class="line">              );</span><br><span class="line">            &#125;,</span><br><span class="line">          ));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，Provider本质上是一个监听者模式，帮我们封装维护好了<code>InheritedWidget</code>，方便使用。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flutter/" rel="tag"><i class="fa fa-tag"></i> Flutter</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/03/Flutter Plugins/" rel="next" title="Flutter Plugins 学习">
+                <i class="fa fa-chevron-left"></i> Flutter Plugins 学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/author.jpg" alt="Liang liu">
+            
+              <p class="site-author-name" itemprop="name">Liang liu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dddddl" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:liouliang93@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Provider-理解使用"><span class="nav-text">Provider 理解使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ChangeNotifierProvider"><span class="nav-text">ChangeNotifierProvider</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简单封装"><span class="nav-text">简单封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#InheritedWidget"><span class="nav-text">InheritedWidget</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Provider"><span class="nav-text">Provider</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liang liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
